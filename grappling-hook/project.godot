@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Grappling Hook"
-run/main_scene="res://world/World.tscn"
+run/main_scene="res://world/world.tscn"
 config/icon="res://icon.png"
 
 [global]

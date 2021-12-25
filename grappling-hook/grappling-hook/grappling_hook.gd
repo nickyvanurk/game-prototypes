@@ -15,7 +15,8 @@ func _process(delta):
 		print("Reeling out...")
 
 func grapple(target):
-	state = State.Grappling
+	# state = State.Grappling
+	state = State.Attached
 	print("Grappling towards: " + str(target))
 	
 func release():
@@ -23,3 +24,6 @@ func release():
 		print("Releasing")
 		
 	state = State.Released
+
+func is_attached():
+	return [State.Attached, State.ReelingIn, State.ReelingOut].has(state)

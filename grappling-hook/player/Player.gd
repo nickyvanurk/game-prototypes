@@ -10,11 +10,19 @@ var velocity = Vector3.ZERO
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var terminal_velocity = ProjectSettings.get("physics/3d/terminal_velocity")
 
+onready var camera = $Camera
 onready var grappling_hook = $GrapplingHook
+
+var ray_length = 100
+var last_space_state
+
+func _ready():
+	last_space_state = get_world().direct_space_state
 
 func _input(event):
 	if event.is_action_pressed("grapple"):
-		grappling_hook.grapple()
+		var target = raycast(last_space_state)
+		if target: grappling_hook.grapple(target)
 	if event.is_action_released("grapple"):
 		grappling_hook.release()
 
@@ -32,3 +40,12 @@ func _physics_process(delta):
 		velocity.y = jump_impulse
 	
 	velocity = move_and_slide(velocity, Vector3.UP, true)
+	
+	last_space_state = get_world().direct_space_state
+
+func raycast(space_state):
+	var center = get_viewport().size / 2
+	var from = camera.project_ray_origin(center)
+	var to = from + camera.project_ray_normal(center) * ray_length
+	var result = space_state.intersect_ray(from, to, [self])
+	return result.position if result else false

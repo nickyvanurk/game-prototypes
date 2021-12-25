@@ -25,4 +25,94 @@ height = 1.0
 depth = 200.0
 material = ExtResource( 2 )
 
+[node name="Pillar5" type="CSGBox" parent="Level"]
+transform = Transform( -1, 0, -2.06632e-07, 0, 1, 0, 2.06632e-07, 0, -1, -16, 10, -12 )
+height = 20.0
+material = ExtResource( 2 )
+
+[node name="BeamLow" type="CSGBox" parent="Level/Pillar5"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
+width = 12.0
+material = ExtResource( 2 )
+
+[node name="BeamHigh" type="CSGBox" parent="Level/Pillar5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
+width = 16.0
+material = ExtResource( 2 )
+
+[node name="Pillar6" type="CSGBox" parent="Level"]
+transform = Transform( 1.94707e-07, 0, -1, 0, 1, 0, 1, 0, 1.94707e-07, -16, 10, 8 )
+height = 20.0
+material = ExtResource( 2 )
+
+[node name="BeamLow" type="CSGBox" parent="Level/Pillar6"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
+width = 12.0
+material = ExtResource( 2 )
+
+[node name="BeamHigh" type="CSGBox" parent="Level/Pillar6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
+width = 16.0
+material = ExtResource( 2 )
+
+[node name="Pillar3" type="CSGBox" parent="Level"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 16, 10.0524, -12 )
+height = 20.0
+material = ExtResource( 2 )
+
+[node name="BeamLow" type="CSGBox" parent="Level/Pillar3"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
+width = 12.0
+material = ExtResource( 2 )
+
+[node name="BeamHigh" type="CSGBox" parent="Level/Pillar3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
+width = 16.0
+material = ExtResource( 2 )
+
+[node name="Pillar4" type="CSGBox" parent="Level"]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 16, 10.0524, 8 )
+height = 20.0
+material = ExtResource( 2 )
+
+[node name="BeamLow" type="CSGBox" parent="Level/Pillar4"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
+width = 12.0
+material = ExtResource( 2 )
+
+[node name="BeamHigh" type="CSGBox" parent="Level/Pillar4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
+width = 16.0
+material = ExtResource( 2 )
+
+[node name="Pillar1" type="CSGBox" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 8 )
+height = 20.0
+material = ExtResource( 2 )
+
+[node name="BeamLow" type="CSGBox" parent="Level/Pillar1"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
+width = 12.0
+material = ExtResource( 2 )
+
+[node name="BeamHigh" type="CSGBox" parent="Level/Pillar1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
+width = 16.0
+material = ExtResource( 2 )
+
+[node name="Pillar2" type="CSGBox" parent="Level"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 10, -12 )
+height = 20.0
+material = ExtResource( 2 )
+
+[node name="BeamLow" type="CSGBox" parent="Level/Pillar2"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
+width = 12.0
+material = ExtResource( 2 )
+
+[node name="BeamHigh" type="CSGBox" parent="Level/Pillar2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
+width = 16.0
+material = ExtResource( 2 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]

@@ -10,6 +10,14 @@ var velocity = Vector3.ZERO
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var terminal_velocity = ProjectSettings.get("physics/3d/terminal_velocity")
 
+onready var grappling_hook = $GrapplingHook
+
+func _input(event):
+	if event.is_action_pressed("grapple"):
+		grappling_hook.grapple()
+	if event.is_action_released("grapple"):
+		grappling_hook.release()
+
 func _physics_process(delta):
 	direction = Vector3.ZERO
 	direction += transform.basis.x * Input.get_axis("move_left", "move_right")

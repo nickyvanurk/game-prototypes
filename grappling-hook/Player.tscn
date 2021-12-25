@@ -33,7 +33,7 @@ material/0 = null
 transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0.75, 0 )
 shape = SubResource( 2 )
 
-[node name="ClippedCamera" type="ClippedCamera" parent="."]
+[node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2.95587, 3.87947 )
 current = true
 far = 1000.0

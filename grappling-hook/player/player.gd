@@ -1,6 +1,6 @@
 extends KinematicBody
 
-var speed = 3
+var speed = 10
 var acceleration = 9
 var air_acceleration = 2
 var jump_impulse = 6.2
@@ -30,8 +30,8 @@ func _input(event):
 func _physics_process(delta):
 	direction = get_input_direction()
 	var accel = acceleration if is_on_floor() else air_acceleration
-	velocity.x = velocity.x + (direction.x * speed - velocity.x) * (accel * delta)
-	velocity.z = velocity.z + (direction.z * speed - velocity.z) * (accel * delta)
+	velocity.x += (direction.x * speed - velocity.x) * (accel * delta)
+	velocity.z += (direction.z * speed - velocity.z) * (accel * delta)
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_impulse

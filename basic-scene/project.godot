@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Basic Scene"
-run/main_scene="res://World.tscn"
+run/main_scene="res://world/World.tscn"
 config/icon="res://icon.png"
 
 [global]

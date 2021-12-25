@@ -2,6 +2,7 @@ extends KinematicBody
 
 var speed = 3
 var acceleration = 9
+var air_acceleration = 2
 var jump_impulse = 6.2
 
 var direction = Vector3.ZERO
@@ -27,23 +28,25 @@ func _input(event):
 		grappling_hook.release()
 
 func _physics_process(delta):
-	direction = Vector3.ZERO
-	direction += transform.basis.x * Input.get_axis("move_left", "move_right")
-	direction += transform.basis.z * Input.get_axis("move_forward", "move_backward")
-	direction = direction.normalized()
-
-	velocity.x = velocity.x + (direction.x * speed - velocity.x) * (acceleration * delta)
-	velocity.z = velocity.z + (direction.z * speed - velocity.z) * (acceleration * delta)
-	
-	if !grappling_hook.is_attached():
-		velocity.y = clamp(velocity.y - (gravity * delta), -terminal_velocity, terminal_velocity)
+	direction = get_input_direction()
+	var accel = acceleration if is_on_floor() else air_acceleration
+	velocity.x = velocity.x + (direction.x * speed - velocity.x) * (accel * delta)
+	velocity.z = velocity.z + (direction.z * speed - velocity.z) * (accel * delta)
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_impulse
 	
+	if !grappling_hook.is_attached():
+		velocity.y = clamp(velocity.y - (gravity * delta), -terminal_velocity, terminal_velocity)
+	
 	velocity = move_and_slide(velocity, Vector3.UP, true)
 	
 	last_space_state = get_world().direct_space_state
+
+func get_input_direction():
+	direction = transform.basis.x * Input.get_axis("move_left", "move_right")
+	direction += transform.basis.z * Input.get_axis("move_forward", "move_backward")
+	return direction.normalized()
 
 func raycast(space_state):
 	var center = get_viewport().size / 2

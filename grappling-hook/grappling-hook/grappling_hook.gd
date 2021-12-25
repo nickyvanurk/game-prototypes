@@ -14,10 +14,12 @@ func _process(delta):
 		state = State.ReelingOut
 		print("Reeling out...")
 
-func grapple():
+func grapple(target):
 	state = State.Grappling
-	print("Grappling")
+	print("Grappling towards: " + str(target))
 	
 func release():
+	if state != State.Released:
+		print("Releasing")
+		
 	state = State.Released
-	print("Releasing")

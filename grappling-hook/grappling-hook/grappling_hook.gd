@@ -33,18 +33,17 @@ func _physics_process(delta):
 	rope.visible = false
 	
 	if is_attached():
-		var parent_hook_delta = (grapple_position - parent.translation)
-		var length = parent_hook_delta.length()
+		var direction = (grapple_position - parent.translation).normalized()
+		var length = (grapple_position - parent.translation).length()
 	
-		# Dampening
-		parent.velocity *= 0.999 if length > rest_length else 0.9
-		
-		# Hooke's law
-		var acceleration = min(abs(rope_stiffness * (length - rest_length)), max_grapple_speed)
-		parent.velocity += parent_hook_delta.normalized() * (acceleration * delta)
-		
 		if length > rope_length:
-			parent.translation = grapple_position - (parent_hook_delta.normalized() * rope_length)
+			parent.translation = grapple_position - (direction * rope_length)
+		
+		var speed_towards_grapple_position = round(parent.velocity.dot(direction) * 100) / 100
+		if speed_towards_grapple_position:
+			if length > rope_length:
+				parent.velocity -= speed_towards_grapple_position * direction
+				parent.translation = grapple_position - direction * length
 		
 		rope.scale = Vector3(0.02, 0.02, length / 2)
 		rope.look_at_from_position((grapple_position + global_transform.origin) / 2, grapple_position, Vector3.UP)

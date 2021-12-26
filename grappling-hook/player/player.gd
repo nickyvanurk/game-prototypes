@@ -2,7 +2,7 @@ extends KinematicBody
 
 var speed = 10
 var acceleration = 9
-var air_acceleration = 2
+var air_acceleration = 6
 var jump_impulse = 6.2
 
 var direction = Vector3.ZERO
@@ -30,8 +30,12 @@ func _input(event):
 func _physics_process(delta):
 	direction = get_input_direction()
 	var accel = acceleration if is_on_floor() else air_acceleration
-	velocity.x += (direction.x * speed - velocity.x) * (accel * delta)
-	velocity.z += (direction.z * speed - velocity.z) * (accel * delta)
+	if is_on_floor():
+		velocity.x += (direction.x * speed - velocity.x) * (accel * delta)
+		velocity.z += (direction.z * speed - velocity.z) * (accel * delta)
+	else:
+		velocity.x += direction.x * accel * delta
+		velocity.z += direction.z * accel * delta
 	
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or grappling_hook.is_attached()):
 		velocity.y += jump_impulse

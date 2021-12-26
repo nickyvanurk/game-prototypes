@@ -2,7 +2,7 @@ extends Spatial
 
 export var max_rope_length = 50
 export var rest_length = 1
-export var rope_stiffness = 10
+export var rope_stiffness = 4
 export var max_grapple_speed = 30
 
 enum State { Released, Attached, ReelingIn, ReelingOut }

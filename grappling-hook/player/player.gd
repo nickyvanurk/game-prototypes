@@ -37,7 +37,6 @@ func _physics_process(delta):
 		velocity.y = jump_impulse
 	
 	velocity.y = clamp(velocity.y - (gravity * delta), -terminal_velocity, terminal_velocity)
-	
 	velocity = move_and_slide(velocity, Vector3.UP, true)
 	
 	last_space_state = get_world().direct_space_state

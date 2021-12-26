@@ -20,9 +20,6 @@ func _ready():
 		set_process(false)
 		set_physics_process(false)
 
-func _process(delta):
-	pass
-
 func _physics_process(delta):
 	rope.visible = false
 	

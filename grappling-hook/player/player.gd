@@ -36,8 +36,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_impulse
 	
-	if !grappling_hook.is_attached():
-		velocity.y = clamp(velocity.y - (gravity * delta), -terminal_velocity, terminal_velocity)
+	velocity.y = clamp(velocity.y - (gravity * delta), -terminal_velocity, terminal_velocity)
 	
 	velocity = move_and_slide(velocity, Vector3.UP, true)
 	

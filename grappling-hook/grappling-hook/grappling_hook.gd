@@ -3,7 +3,7 @@ extends Spatial
 export var max_rope_length = 50
 export var rest_length = 1
 export var rope_stiffness = 10
-export var max_grapple_speed = 15
+export var max_grapple_speed = 30
 
 enum State { Released, Attached, ReelingIn, ReelingOut }
 
@@ -11,6 +11,8 @@ var state = State.Released
 var grapple_position = Vector3.ZERO
 
 onready var parent = get_parent()
+onready var line_geometry = get_node("LineGeometry")
+onready var rope = $Rope
 
 func _ready():
 	if !("velocity" in parent):
@@ -27,6 +29,8 @@ func _process(delta):
 		print("Reeling out...")
 
 func _physics_process(delta):
+	rope.visible = false
+	
 	if is_attached():
 		var parent_hook_delta = (grapple_position - parent.translation)
 		var length = parent_hook_delta.length()
@@ -37,6 +41,10 @@ func _physics_process(delta):
 		# Hooke's law
 		var acceleration = min(abs(rope_stiffness * (length - rest_length)), max_grapple_speed)
 		parent.velocity += parent_hook_delta.normalized() * (acceleration * delta)
+		
+		rope.scale = Vector3(0.02, 0.02, length / 2)
+		rope.look_at_from_position((grapple_position + global_transform.origin) / 2, grapple_position, Vector3.UP)
+		rope.visible = true
 
 func grapple(target):
 	state = State.Attached

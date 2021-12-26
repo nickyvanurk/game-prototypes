@@ -1,15 +1,14 @@
 extends Spatial
 
+export var min_rope_length = 1
 export var max_rope_length = 50
-export var rest_length = 1
-export var rope_stiffness = 4
-export var max_grapple_speed = 30
+export var reel_speed = 3
 
 enum State { Released, Attached, ReelingIn, ReelingOut }
 
 var state = State.Released
 var grapple_position = Vector3.ZERO
-var rope_length
+var rope_length = min_rope_length
 
 onready var parent = get_parent()
 onready var line_geometry = get_node("LineGeometry")
@@ -22,28 +21,32 @@ func _ready():
 		set_physics_process(false)
 
 func _process(delta):
-	if Input.is_action_pressed("reel_in") && [State.Attached, State.ReelingIn, State.ReelingOut].has(state):
-		state = State.ReelingIn
-		print("Reeling in...")
-	if Input.is_action_pressed("reel_out") && [State.Attached, State.ReelingIn, State.ReelingOut].has(state):
-		state = State.ReelingOut
-		print("Reeling out...")
+	pass
 
 func _physics_process(delta):
 	rope.visible = false
 	
 	if is_attached():
+		if Input.is_action_pressed("reel_in"):
+			state = State.ReelingIn
+			if rope_length > min_rope_length:
+				rope_length -= reel_speed * delta
+		if Input.is_action_pressed("reel_out"):
+			state = State.ReelingOut
+			if rope_length < max_rope_length:
+				rope_length += reel_speed * delta
+				var direction = (grapple_position - parent.translation).normalized()
+				parent.translation = grapple_position - direction * rope_length
+			
 		var direction = (grapple_position - parent.translation).normalized()
 		var length = (grapple_position - parent.translation).length()
-	
-		if length > rope_length:
-			parent.translation = grapple_position - (direction * rope_length)
 		
-		var speed_towards_grapple_position = round(parent.velocity.dot(direction) * 100) / 100
-		if speed_towards_grapple_position:
-			if length > rope_length:
+		if length > rope_length:
+			parent.translation = grapple_position - direction * rope_length
+		
+			var speed_towards_grapple_position = round(parent.velocity.dot(direction) * 100) / 100
+			if speed_towards_grapple_position < 0:
 				parent.velocity -= speed_towards_grapple_position * direction
-				parent.translation = grapple_position - direction * length
 		
 		rope.scale = Vector3(0.02, 0.02, length / 2)
 		rope.look_at_from_position((grapple_position + global_transform.origin) / 2, grapple_position, Vector3.UP)

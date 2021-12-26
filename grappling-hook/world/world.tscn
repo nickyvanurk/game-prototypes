@@ -17,6 +17,36 @@ shadow_contact = 0.3
 [node name="Level" type="CSGCombiner" parent="."]
 use_collision = true
 
+[node name="SkyBlock3" type="CSGBox" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 120, -30 )
+use_collision = true
+width = 10.0
+depth = 10.0
+material = ExtResource( 2 )
+
+[node name="SkyBlock2" type="CSGBox" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 120, 30 )
+use_collision = true
+width = 10.0
+depth = 10.0
+material = ExtResource( 2 )
+
+[node name="Building2" type="CSGBox" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 50, 70 )
+use_collision = true
+width = 20.0
+height = 100.0
+depth = 20.0
+material = ExtResource( 2 )
+
+[node name="Building" type="CSGBox" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 50, -70 )
+use_collision = true
+width = 20.0
+height = 100.0
+depth = 20.0
+material = ExtResource( 2 )
+
 [node name="Floor" type="CSGBox" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
 use_collision = true
@@ -116,3 +146,4 @@ width = 16.0
 material = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 103, 63 )

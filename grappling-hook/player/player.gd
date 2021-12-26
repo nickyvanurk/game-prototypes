@@ -1,8 +1,8 @@
 extends KinematicBody
 
-var speed = 10
+var speed = 5
 var acceleration = 9
-var air_acceleration = 6
+var air_acceleration = 2
 var jump_impulse = 6.2
 
 var direction = Vector3.ZERO

@@ -17,10 +17,3 @@ func _process(delta):
 	transform.origin = lerp(global_transform.origin, mount.global_transform.origin, 0.5)
 	look_at(pivot.global_transform.origin, Vector3.UP)
 	
-func raycast():
-	var center = get_viewport().size / 2
-	var from = project_ray_origin(center)
-	var to = from + project_ray_normal(center) * ray_length
-	var raycast_layer = 4
-	var result = get_world().direct_space_state.intersect_ray(from, to, [self], raycast_layer)
-	return result if result else false

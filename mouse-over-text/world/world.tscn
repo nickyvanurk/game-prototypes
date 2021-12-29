@@ -37,13 +37,13 @@ material = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
-[node name="Item" parent="." instance=ExtResource( 4 )]
+[node name="Potion" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
 
-[node name="Item2" parent="." instance=ExtResource( 4 )]
+[node name="Sword" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -6 )
 
-[node name="Item3" parent="." instance=ExtResource( 4 )]
+[node name="Treasure" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -6 )
 
 [node name="UI" type="Control" parent="."]
@@ -63,7 +63,7 @@ margin_top = -7.0
 margin_right = 20.0
 margin_bottom = 7.0
 custom_fonts/font = SubResource( 2 )
-text = "Press [F] to interact"
+text = "[F] Interact"
 __meta__ = {
 "_edit_use_anchors_": false
 }

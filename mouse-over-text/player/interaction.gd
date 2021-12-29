@@ -27,7 +27,8 @@ func set_interaction_text(collider):
 		var name_text = collider.get_name()
 		var interaction_text = collider.get_interaction_text()
 		var interact_key = OS.get_scancode_string(InputMap.get_action_list("interact")[0].scancode)
-		interaction_label.set_text("%s\n[%s] %s" % [name_text, interact_key, interaction_text])
+		var text = ("%s\n[[b][color=yellow]%s[/color][/b]] %s" % [name_text, interact_key, interaction_text])
+		interaction_label.bbcode_text = text
 		interaction_label.set_visible(true)
 	else:
 		interaction_label.set_text("")

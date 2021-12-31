@@ -5,4 +5,5 @@ Game prototypes made in the Godot engine.
 
 [Basic Scene](basic-scene/)\
 [Grappling Hook](grappling-hook/)\
-[Object Interaction](object-interaction/)
+[Object Interaction](object-interaction/)\
+[Procedural Animation (WIP)](procedural-animation/)

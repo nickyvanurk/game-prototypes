@@ -1,32 +1,17 @@
 extends Position3D
 
-onready var upper = $Joint1
-onready var middle = $Joint2
-onready var lower = $Joint3
-
 onready var player = get_node("/root/World/Player")
 
-var len_upper = 0
-var len_middle = 0
-var len_lower = 0
+var segments = []
 
 func _ready():
-	# change to correct length later
-	len_upper = 1
-	len_middle = 1
-	len_lower = 1
+	for segment in get_children():
+		segments.push_back(segment)
 
 func _physics_process(delta):
-	var target = player.global_transform.origin
-	
-	lower.look_at(target, Vector3.UP)
-	var distance = (target - lower.global_transform.origin).normalized() * len_lower
-	lower.global_transform.origin = target - distance
-	
-	middle.look_at(lower.global_transform.origin, Vector3.UP)
-	distance = (lower.global_transform.origin - middle.global_transform.origin).normalized() * len_middle
-	middle.global_transform.origin = lower.global_transform.origin - distance
-	
-	upper.look_at(middle.global_transform.origin, Vector3.UP)
-	distance = (middle.global_transform.origin - upper.global_transform.origin).normalized() * len_upper
-	upper.global_transform.origin = middle.global_transform.origin - distance
+	for i in range(segments.size() - 1, -1, -1):
+		var segment = segments[i]
+		var target = player if i == segments.size() - 1 else segments[i + 1]
+		var distance = (target.global_transform.origin - segment.global_transform.origin).normalized() * segment.length
+		segment.look_at(target.global_transform.origin, Vector3.UP)
+		segment.global_transform.origin = target.global_transform.origin - distance

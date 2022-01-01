@@ -10,6 +10,7 @@ onready var player = get_node("/root/World/Player")
 
 var chain_origin = Vector3()
 var target = null
+var middle_joint_target = null
 
 func _ready():
 	if target == null:
@@ -27,6 +28,15 @@ func _ready():
 			target.name = "Target"
 		else:
 			target = $Target
+	if middle_joint_target == null:
+		if not has_node("MiddleJoint"):
+			middle_joint_target = Position3D.new()
+			add_child(middle_joint_target)
+
+			middle_joint_target.name = "MiddleJoint"
+		else:
+			middle_joint_target = $MiddleJoint
+			
 	bones = bones.get_children()
 
 func _physics_process(delta):
@@ -47,16 +57,24 @@ func solve_chain():
 	var target_pos = target.global_transform.origin + (last_bone_dir * last_bone.length)
 	
 	# Get the difference between our end effector (the final bone in the chain) and the target
-	var dif = (last_bone.global_transform.origin - target_pos).length()
+#	var dif = (last_bone.global_transform.origin - target_pos).length()
+	var dif = (bones[bones.size()-1].global_transform.origin - target_pos).length()
 	var chain_iterations = 0
 	
+	if dif > CHAIN_TOLERANCE:
+		# If we have more than 2 bones, move our middle joint towards it!
+		if bones.size() > 2:
+			var middle_point_pos = middle_joint_target.global_transform.origin
+			var middle_point_pos_diff = (middle_point_pos - bones[bones.size() / 2].global_transform.origin)
+			bones[bones.size() / 2].global_transform.origin += middle_point_pos_diff.normalized()
+		
 	while dif > CHAIN_TOLERANCE:
 		chain_backward()
 		chain_forward()
 		chain_apply_rotation()
 
 		# Update the difference between our end effector (the final bone in the chain) and the target
-		dif = (last_bone.global_transform.origin - target_pos).length()
+		dif = (bones[bones.size()-1].global_transform.origin - target_pos).length()
 
 		# Add one to chain_iterations. If we have reached our max iterations, then break
 		chain_iterations = chain_iterations + 1

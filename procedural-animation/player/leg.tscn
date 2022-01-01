@@ -39,5 +39,8 @@ mesh = SubResource( 1 )
 skeleton = NodePath("")
 material/0 = null
 
+[node name="MiddleJoint" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.5 )
+
 [node name="Target" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.984785, -2.88191 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )

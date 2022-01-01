@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://world/environment.tres" type="Environment" id=1]
 [ext_resource path="res://assets/blocks/light/light.tres" type="Material" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player/leg.tscn" type="PackedScene" id=4]
 
 [node name="World" type="Spatial"]
 
@@ -26,3 +27,6 @@ depth = 200.0
 material = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
+
+[node name="Leg" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94539, -4.244 )

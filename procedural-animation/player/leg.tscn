@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://player/leg.gd" type="Script" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+
+[node name="Leg" type="Position3D"]
+script = ExtResource( 1 )
+
+[node name="Joint1" type="Position3D" parent="."]
+
+[node name="Upper" type="MeshInstance" parent="Joint1"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.5, 0, 0, -0.5 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="Joint2" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+
+[node name="Middle" type="MeshInstance" parent="Joint2"]
+transform = Transform( 0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.5, 0, 0, -0.5 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="Joint3" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+
+[node name="Lower" type="MeshInstance" parent="Joint3"]
+transform = Transform( 0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.5, 0, 0, -0.5 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null

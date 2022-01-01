@@ -5,7 +5,7 @@ const CHAIN_TOLERANCE = 0.01
 # The amount of interations the bone chain will go through in an attempt to get to the target position
 const CHAIN_MAX_ITER = 10
 
-onready var bones = $Bones
+onready var bones = $Bones.get_children()
 onready var player = get_node("/root/World/Player")
 
 var chain_origin = Vector3()
@@ -37,13 +37,10 @@ func _ready():
 		else:
 			middle_joint_target = $MiddleJoint
 			
-	bones = bones.get_children()
-
 func _physics_process(delta):
 	target = player
 	
 	solve_chain()
-
 
 func solve_chain():
 	# Update the origin with the first bone's origin
@@ -65,8 +62,10 @@ func solve_chain():
 		# If we have more than 2 bones, move our middle joint towards it!
 		if bones.size() > 2:
 			var middle_point_pos = middle_joint_target.global_transform.origin
-			var middle_point_pos_diff = (middle_point_pos - bones[bones.size() / 2].global_transform.origin)
-			bones[bones.size() / 2].global_transform.origin += middle_point_pos_diff.normalized()
+			var middle_point_pos_diff = (middle_point_pos - bones[1].global_transform.origin)
+			bones[1].global_transform.origin += middle_point_pos_diff.normalized()
+			middle_point_pos_diff = (middle_point_pos - bones[2].global_transform.origin)
+			bones[2].global_transform.origin += middle_point_pos_diff.normalized()
 		
 	while dif > CHAIN_TOLERANCE:
 		chain_backward()

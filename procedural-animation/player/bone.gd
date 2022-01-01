@@ -1,3 +1,3 @@
 extends Position3D
 
-export var length = 1
+export(float) var length = 1

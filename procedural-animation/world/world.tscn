@@ -29,4 +29,10 @@ material = ExtResource( 2 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
 [node name="Leg" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94539, -4.244 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.4, -4 )
+
+[node name="Leg2" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 1.4, -4 )
+
+[node name="Leg3" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 1.4, -4 )

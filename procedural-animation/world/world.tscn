@@ -31,8 +31,22 @@ material = ExtResource( 2 )
 [node name="Leg" parent="." instance=ExtResource( 4 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.4, -4 )
 
+[node name="Bone1" parent="Leg/Bones" index="0"]
+transform = Transform( 0.99471, 1.06991e-07, -0.102572, 0, 0.999989, 1.04307e-06, 0.102572, -1.03757e-06, 0.99471, 1.47259, -0.0633302, -1.60701 )
+
+[node name="Bone2" parent="Leg/Bones" index="1"]
+transform = Transform( 0.99944, 1.52363e-08, -0.0319516, 0, 0.99999, 4.76813e-07, 0.0319516, -4.76589e-07, 0.99944, 1.55465, -0.063331, -2.40279 )
+
+[node name="Bone3" parent="Leg/Bones" index="2"]
+transform = Transform( 0.999958, 0, 0.00519655, 0, 0.999988, 0, -0.00519658, 0, 0.999953, 1.5866, -0.0633315, -3.40228 )
+
+[node name="Target" parent="Leg" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.584, -0.0633315, -3.90227 )
+
 [node name="Leg2" parent="." instance=ExtResource( 4 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 1.4, -4 )
 
 [node name="Leg3" parent="." instance=ExtResource( 4 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 1.4, -4 )
+
+[editable path="Leg"]

@@ -5,10 +5,20 @@ const CHAIN_MAX_ITER = 3
 onready var bones = $Bones.get_children()
 onready var target = get_node("/root/World/Player/CameraPivot")
 
+var detect_range = 5
+var depth = -3.5
+
+func _ready():
+	global_transform.origin.y = depth
+
 func _physics_process(delta):
 	if !bones || !target: return
 	
-	solve()
+	if global_transform.origin.distance_to(target.global_transform.origin) <= detect_range:
+		solve()
+		global_transform.origin.y = lerp(global_transform.origin.y, 0, 2 * delta)
+	elif global_transform.origin.y != depth:
+		global_transform.origin.y = lerp(global_transform.origin.y, depth, 0.2 * delta)
 
 func solve():
 	var base = bones[0].global_transform.origin

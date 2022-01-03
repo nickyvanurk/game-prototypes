@@ -282,7 +282,7 @@ script = ExtResource( 3 )
 
 [node name="Bone1" type="Position3D" parent="Bones"]
 script = ExtResource( 1 )
-length = 1.18
+length = 1.35
 
 [node name="lower_arm" type="MeshInstance" parent="Bones/Bone1"]
 transform = Transform( -0.02, 2.2701e-09, 0, -2.2701e-09, -0.02, 0, 0, 0, 0.02, 0.139783, -0.56998, -0.146581 )

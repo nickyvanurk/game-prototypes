@@ -24,12 +24,12 @@ func solve():
 	for i in range(CHAIN_MAX_ITER):
 		iterate_backward(target)
 		iterate_forward(base)
+		
+		apply_rotation()
 	
-#		for j in range(bones.size()):
-#			apply_ball_socket_constraint(j, deg2rad(90))
-
-	apply_rotation()
-
+#		for j in range(1, bones.size()):
+#			apply_hinge_socket_constraint(j, Vector3(0, 0, 1))
+			
 func iterate_backward(target):
 	var size = bones.size()
 	if size < 2: return
@@ -45,9 +45,11 @@ func iterate_forward(base):
 	var size = bones.size()
 	if size < 2: return
 	
+	bones[0].global_transform.origin = base
+	
 	for i in range(1, size):
 		var curr = bones[i]
-		var prev = base if i == 0 else bones[i - 1]
+		var prev = bones[i - 1]
 		var direction = prev.global_transform.origin.direction_to(curr.global_transform.origin)
 		var offset = direction * prev.length
 		curr.global_transform.origin = prev.global_transform.origin + offset
@@ -63,6 +65,12 @@ func apply_rotation():
 		var offset = direction * prev.length
 		prev.look_at(curr.global_transform.origin, Vector3.UP)
 
+#func apply_hinge_socket_constraint(idx, axis):
+#	var currentHinge = bones[idx].global_transform.basis.z
+#	var desiredHinge = bones[idx-1].global_transform.origin
+#
+#	bones[idx].rotation.y = lerp(bones[idx].rotation.y, bones[idx-1].rotation.y, 1 )
+#
 #func apply_ball_socket_constraint(idx, limit):
 #	var parentForward = get_parent().global_transform.basis.z if idx == 0 else bones[idx - 1].global_transform.basis.z
 #	var thisForward = bones[idx].global_transform.basis.z

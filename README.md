@@ -6,5 +6,4 @@ Game prototypes made in the Godot engine.
 [Basic Scene](basic-scene/)\
 [Grappling Hook](grappling-hook/)\
 [Object Interaction](object-interaction/)\
-[Inverse Kinematics](inverse-kinematics/)\
-[Procedural Animation (WIP)](procedural-animation/)
+[Inverse Kinematics](inverse-kinematics/)

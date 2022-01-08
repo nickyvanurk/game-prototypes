@@ -1,8 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://world/environment.tres" type="Environment" id=1]
-[ext_resource path="res://assets/blocks/light/light.tres" type="Material" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=4]
+[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=5]
+[ext_resource path="res://terrain_data/data.hterrain" type="Resource" id=6]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 5 )
+mode = 0
+textures = [ [  ], [  ] ]
 
 [node name="World" type="Spatial"]
 
@@ -14,15 +21,18 @@ transform = Transform( -0.707107, 0.5, -0.5, 3.09086e-08, 0.707107, 0.707107, 0.
 shadow_enabled = true
 shadow_contact = 0.3
 
-[node name="Level" type="CSGCombiner" parent="."]
-use_collision = true
-
-[node name="Floor" type="CSGBox" parent="Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
-use_collision = true
-width = 200.0
-height = 1.0
-depth = 200.0
-material = ExtResource( 2 )
+[node name="HTerrain" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -256, -0.562, -256 )
+script = ExtResource( 4 )
+_terrain_data = ExtResource( 6 )
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "LowPoly"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource( 1 )
+render_layers = 1
 
 [node name="Player" parent="." instance=ExtResource( 3 )]

@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/zylann.scatter/tools/palette.gd" type="Script" id=1]
+
+[node name="Palette" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -874.0
+rect_min_size = Vector2( 210, 0 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 202.0
+margin_bottom = 20.0
+
+[node name="AddButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 49.0
+margin_bottom = 20.0
+text = "Add..."
+
+[node name="RemoveButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 53.0
+margin_right = 117.0
+margin_bottom = 20.0
+text = "Remove"
+
+[node name="ItemList" type="ItemList" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 202.0
+margin_bottom = 564.0
+size_flags_vertical = 3
+select_mode = 1
+
+[node name="MarginContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 568.0
+margin_right = 202.0
+margin_bottom = 592.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginLabel" type="Label" parent="VBoxContainer/MarginContainer"]
+margin_top = 5.0
+margin_right = 99.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Object margin:"
+align = 1
+
+[node name="MarginSpinBox" type="SpinBox" parent="VBoxContainer/MarginContainer"]
+margin_left = 103.0
+margin_right = 202.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+max_value = 10.0
+step = 0.01
+allow_greater = true
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddButton" to="." method="_on_AddButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/RemoveButton" to="." method="_on_RemoveButton_pressed"]
+[connection signal="multi_selected" from="VBoxContainer/ItemList" to="." method="_on_ItemList_multi_selected"]

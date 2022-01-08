@@ -20,7 +20,7 @@ max_pitch = 60.0
 
 [node name="CameraBoom" type="SpringArm" parent="CameraPivot"]
 transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0 )
-spring_length = 4.0
+spring_length = 8.0
 
 [node name="CameraMount" type="Position3D" parent="CameraPivot/CameraBoom"]
 

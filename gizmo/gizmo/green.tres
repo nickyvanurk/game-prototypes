@@ -1,0 +1,7 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+render_priority = 127
+flags_vertex_lighting = true
+flags_no_depth_test = true
+albedo_color = Color( 0.478431, 0.756863, 0.0196078, 1 )

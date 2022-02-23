@@ -1,0 +1,10 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+render_priority = 127
+flags_vertex_lighting = true
+flags_no_depth_test = true
+flags_world_triplanar = true
+albedo_color = Color( 0.905882, 0.752941, 0.223529, 1 )
+uv1_scale = Vector3( 0.5, 0.5, 0.5 )
+uv1_triplanar = true

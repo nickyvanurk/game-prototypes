@@ -17,6 +17,8 @@ func _on_input_event(camera, event, position, normal, shape_idx):
 		material.albedo_color = original_color
 		is_dragging = false
 	
+	$CollisionShape.disabled = is_dragging
+	
 	if is_dragging:
 		var ray_from = camera.global_transform.origin
 		var ray_dir = camera.project_ray_normal(event.position)

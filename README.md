@@ -8,5 +8,5 @@ Game prototypes made in the Godot engine.
 [Grappling Hook](grappling-hook/)\
 [Object Interaction](object-interaction/)\
 [Inverse Kinematics](inverse-kinematics/)\
-[Spatial Gizmo](spatial-gizmo/)\
+[Drag and Drop](drag-and-drop/)\
 [Procedural Animation](procedural-animation/)

@@ -27,6 +27,8 @@ spring_length = 4.0
 
 [node name="CameraMount" type="Position3D" parent="CameraPivot/CameraBoom"]
 
+[node name="Tween" type="Tween" parent="CameraPivot"]
+
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0.75, 0 )
 mesh = SubResource( 1 )

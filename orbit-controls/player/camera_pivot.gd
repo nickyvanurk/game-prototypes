@@ -11,6 +11,7 @@ export(float) var zoom_duration = 0.2
 
 onready var parent = get_parent()
 onready var camera_boom = $CameraBoom
+onready var tween = $Tween
 
 var zoom_level = 1.0 setget set_zoom_level
 
@@ -31,4 +32,13 @@ func _input(event):
 
 func set_zoom_level(value):
 	zoom_level = clamp(value, min_zoom, max_zoom)
-	camera_boom.spring_length = zoom_level
+	tween.interpolate_property(
+		camera_boom,
+		"spring_length",
+		camera_boom.spring_length,
+		zoom_level,
+		zoom_duration,
+		Tween.TRANS_SINE,
+		Tween.EASE_OUT
+	)
+	tween.start()

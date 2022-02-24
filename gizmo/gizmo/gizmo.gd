@@ -13,13 +13,6 @@ func set_parent(obj):
 
 func _physics_process(delta):
 	visible = parent != null
-#	if parent != null:
-#		global_transform.origin = parent.global_transform.origin
-#	var new_parent = get_node(parent_path)
-#	visible = new_parent != null
-#	if parent != new_parent:
-#		global_transform.origin = parent.global_transform.origin
-#	parent = new_parent
 
 func _on_x_input_event(camera, event, position, normal, shape_idx):
 	if event.is_action_pressed("select_object"):
@@ -57,7 +50,6 @@ func move_on_axis(camera, event, raycast_hit_position, axis, plane):
 		origin = Vector3()
 		offset = Vector3()
 
-	print(parent)
 	if parent == null: return
 	var shape = parent.get_node("CollisionShape")
 	if shape: shape.disabled = is_dragging

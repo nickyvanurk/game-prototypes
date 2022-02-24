@@ -1,5 +1,5 @@
-# Drag and Drop
+# Gizmo
 
-Drag and drop any spatial object.
+Move objects around with the assistance of a gizmo, at runtime.
 
-![Drag and Drop](docs/drag-and-drop.gif)
+![Gizmo](docs/gizmo.gif)

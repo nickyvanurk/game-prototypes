@@ -9,4 +9,4 @@ Game prototypes made in the Godot engine.
 [Object Interaction](object-interaction/)\
 [Inverse Kinematics](inverse-kinematics/)\
 [Drag and Drop](drag-and-drop/)\
-[Procedural Animation](procedural-animation/)
+[Gizmo](gizmo/)

@@ -28,8 +28,8 @@ radial_segments = 20
 rings = 2
 
 [sub_resource type="CylinderShape" id=9]
-radius = 0.05
-height = 1.0
+radius = 0.08
+height = 1.1
 
 [sub_resource type="SpatialMaterial" id=4]
 render_priority = 127
@@ -94,7 +94,7 @@ skeleton = NodePath("../..")
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="x"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0 )
 shape = SubResource( 9 )
 
 [node name="y" type="KinematicBody" parent="."]

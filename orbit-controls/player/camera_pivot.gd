@@ -11,3 +11,9 @@ func _input(event):
 		parent.rotation_degrees.y -= event.relative.x * mouse_sensitivity
 		rotation_degrees.x -= event.relative.y * mouse_sensitivity
 		rotation_degrees.x = clamp(rotation_degrees.x, min_pitch, max_pitch)
+	
+	if event.is_action_pressed("zoom_in"):
+		print("zoom in")
+		
+	if event.is_action_pressed("zoom_out"):
+		print("zoom out")

@@ -47,7 +47,6 @@ material = SubResource( 1 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
 [node name="Cube" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5 )
 input_capture_on_drag = true
 script = ExtResource( 4 )
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://gizmo/red.tres" type="Material" id=1]
 [ext_resource path="res://gizmo/yellow.tres" type="Material" id=2]
@@ -26,6 +26,10 @@ bottom_radius = 0.01
 height = 0.8
 radial_segments = 20
 rings = 2
+
+[sub_resource type="CylinderShape" id=9]
+radius = 0.05
+height = 1.0
 
 [sub_resource type="SpatialMaterial" id=4]
 render_priority = 127
@@ -71,8 +75,11 @@ rings = 2
 [node name="Gizmo" type="Spatial"]
 script = ExtResource( 4 )
 
-[node name="x" type="Spatial" parent="."]
+[node name="x" type="KinematicBody" parent="."]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+collision_layer = 32768
+collision_mask = 32768
+input_capture_on_drag = true
 
 [node name="Cone" type="MeshInstance" parent="x"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0 )
@@ -86,7 +93,14 @@ mesh = SubResource( 3 )
 skeleton = NodePath("../..")
 material/0 = null
 
-[node name="y" type="Spatial" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="x"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 9 )
+
+[node name="y" type="KinematicBody" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+input_capture_on_drag = true
 
 [node name="Cone" type="MeshInstance" parent="y"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0 )
@@ -100,8 +114,15 @@ mesh = SubResource( 6 )
 skeleton = NodePath("../..")
 material/0 = null
 
-[node name="z" type="Spatial" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="y"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 9 )
+
+[node name="z" type="KinematicBody" parent="."]
 transform = Transform( 1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0 )
+collision_layer = 32768
+collision_mask = 32768
+input_capture_on_drag = true
 
 [node name="Cone" type="MeshInstance" parent="z"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0 )
@@ -114,3 +135,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
 mesh = SubResource( 8 )
 skeleton = NodePath("../..")
 material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="z"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 9 )
+
+[connection signal="input_event" from="x" to="." method="_on_x_input_event"]
+[connection signal="input_event" from="y" to="." method="_on_y_input_event"]
+[connection signal="input_event" from="z" to="." method="_on_z_input_event"]

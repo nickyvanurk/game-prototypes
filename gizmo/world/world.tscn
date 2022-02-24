@@ -3,8 +3,8 @@
 [ext_resource path="res://world/environment.tres" type="Environment" id=1]
 [ext_resource path="res://assets/blocks/texture_01.png" type="Texture" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://world/cube.gd" type="Script" id=4]
 [ext_resource path="res://gizmo/gizmo.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world/world.gd" type="Script" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -23,6 +23,7 @@ albedo_color = Color( 0.584314, 0.584314, 0.584314, 1 )
 [sub_resource type="BoxShape" id=4]
 
 [node name="World" type="Spatial"]
+script = ExtResource( 6 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 1 )
@@ -47,8 +48,10 @@ material = SubResource( 1 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
 [node name="Cube" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )
+collision_layer = 4
+collision_mask = 4
 input_capture_on_drag = true
-script = ExtResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cube"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
@@ -60,9 +63,36 @@ material/0 = SubResource( 3 )
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 shape = SubResource( 4 )
 
-[node name="Gizmo" parent="." instance=ExtResource( 5 )]
-parent_path = NodePath("../Cube")
+[node name="Cube2" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3 )
+collision_layer = 4
+collision_mask = 4
+input_capture_on_drag = true
 
-[connection signal="input_event" from="Cube" to="Cube" method="_on_input_event"]
+[node name="MeshInstance" type="MeshInstance" parent="Cube2"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Cube2"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="Cube3" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3 )
+collision_layer = 4
+collision_mask = 4
+input_capture_on_drag = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Cube3"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Cube3"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="Gizmo" parent="." instance=ExtResource( 5 )]
 
 [editable path="Player"]

@@ -55,6 +55,9 @@ func move_on_axis(camera, event, raycast_hit_position, axis, plane):
 		origin = Vector3()
 		offset = Vector3()
 		
+	var shape = parent.get_node("CollisionShape")
+	if shape: shape.disabled = is_dragging
+		
 	if is_dragging:
 		plane.intersects_ray(camera.global_transform.origin, camera.project_ray_normal(event.position))
 		var result = plane.intersects_ray(camera.global_transform.origin, camera.project_ray_normal(event.position))

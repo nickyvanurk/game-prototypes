@@ -1,0 +1,145 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://gizmo/red.tres" type="Material" id=1]
+[ext_resource path="res://gizmo/yellow.tres" type="Material" id=2]
+[ext_resource path="res://gizmo/green.tres" type="Material" id=3]
+[ext_resource path="res://gizmo/gizmo.gd" type="Script" id=4]
+
+[sub_resource type="CylinderMesh" id=1]
+material = ExtResource( 1 )
+top_radius = 0.0
+bottom_radius = 0.04
+height = 0.3
+radial_segments = 20
+rings = 2
+
+[sub_resource type="SpatialMaterial" id=2]
+render_priority = 127
+flags_vertex_lighting = true
+flags_no_depth_test = true
+albedo_color = Color( 0.835294, 0.180392, 0.286275, 1 )
+
+[sub_resource type="CylinderMesh" id=3]
+material = SubResource( 2 )
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.8
+radial_segments = 20
+rings = 2
+
+[sub_resource type="CylinderShape" id=9]
+radius = 0.08
+height = 1.1
+
+[sub_resource type="SpatialMaterial" id=4]
+render_priority = 127
+flags_vertex_lighting = true
+flags_no_depth_test = true
+flags_world_triplanar = true
+albedo_color = Color( 0.478431, 0.756863, 0.0196078, 1 )
+uv1_scale = Vector3( 0.5, 0.5, 0.5 )
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id=5]
+material = SubResource( 4 )
+top_radius = 0.0
+bottom_radius = 0.04
+height = 0.3
+radial_segments = 20
+rings = 2
+
+[sub_resource type="CylinderMesh" id=6]
+material = ExtResource( 3 )
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.8
+radial_segments = 20
+rings = 2
+
+[sub_resource type="CylinderMesh" id=7]
+material = ExtResource( 2 )
+top_radius = 0.0
+bottom_radius = 0.04
+height = 0.3
+radial_segments = 20
+rings = 2
+
+[sub_resource type="CylinderMesh" id=8]
+material = ExtResource( 2 )
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.8
+radial_segments = 20
+rings = 2
+
+[node name="Gizmo" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="x" type="KinematicBody" parent="."]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+collision_layer = 32768
+collision_mask = 32768
+input_capture_on_drag = true
+
+[node name="Cone" type="MeshInstance" parent="x"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="Base" type="MeshInstance" parent="x"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="x"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0 )
+shape = SubResource( 9 )
+
+[node name="y" type="KinematicBody" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+input_capture_on_drag = true
+
+[node name="Cone" type="MeshInstance" parent="y"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="Base" type="MeshInstance" parent="y"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="y"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 9 )
+
+[node name="z" type="KinematicBody" parent="."]
+transform = Transform( 1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0 )
+collision_layer = 32768
+collision_mask = 32768
+input_capture_on_drag = true
+
+[node name="Cone" type="MeshInstance" parent="z"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="Base" type="MeshInstance" parent="z"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
+mesh = SubResource( 8 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="z"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 9 )
+
+[connection signal="input_event" from="x" to="." method="_on_x_input_event"]
+[connection signal="input_event" from="y" to="." method="_on_y_input_event"]
+[connection signal="input_event" from="z" to="." method="_on_z_input_event"]

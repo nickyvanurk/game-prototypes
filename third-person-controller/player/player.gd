@@ -28,7 +28,7 @@ func _physics_process(delta):
 		velocity.y = jump_impulse
 	
 	if direction != Vector3.ZERO:
-		anim_tree["parameters/playback"].travel("Run")
+		anim_tree["parameters/playback"].travel("Walk")
 	else:
 		anim_tree["parameters/playback"].travel("Idle")
 	

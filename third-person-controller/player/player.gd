@@ -24,12 +24,14 @@ func _physics_process(delta):
 	velocity.z = velocity.z + (direction.z * speed - velocity.z) * (acceleration * delta)
 	velocity.y = clamp(velocity.y - (gravity * delta), -terminal_velocity, terminal_velocity)
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_impulse
-	
-	if direction != Vector3.ZERO:
-		anim_tree["parameters/playback"].travel("Walk")
-	else:
-		anim_tree["parameters/playback"].travel("Idle")
+	if is_on_floor():
+		if direction != Vector3.ZERO:
+			anim_tree["parameters/playback"].travel("Walk")
+		else:
+			anim_tree["parameters/playback"].travel("Idle")
+		
+		if Input.is_action_just_pressed("jump"):
+			velocity.y = jump_impulse
+			anim_tree["parameters/playback"].travel("Jump")
 	
 	velocity = move_and_slide(velocity, Vector3.UP, true)

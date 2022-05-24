@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://player/camera.gd" type="Script" id=2]
@@ -6834,6 +6834,9 @@ tracks/46/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1.4, 1, 0, 0
 [sub_resource type="AnimationNodeAnimation" id=32]
 animation = "Idle"
 
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "Jump"
+
 [sub_resource type="AnimationNodeAnimation" id=33]
 animation = "Walk"
 
@@ -6841,12 +6844,22 @@ animation = "Walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=35]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+
 [sub_resource type="AnimationNodeStateMachine" id=36]
 states/Idle/node = SubResource( 32 )
-states/Idle/position = Vector2( 175, 83 )
+states/Idle/position = Vector2( 157, 83 )
+states/Jump/node = SubResource( 38 )
+states/Jump/position = Vector2( 265, 190 )
 states/Walk/node = SubResource( 33 )
 states/Walk/position = Vector2( 362, 83 )
-transitions = [ "Idle", "Walk", SubResource( 34 ), "Walk", "Idle", SubResource( 35 ) ]
+transitions = [ "Idle", "Walk", SubResource( 34 ), "Walk", "Idle", SubResource( 35 ), "Idle", "Jump", SubResource( 39 ), "Jump", "Idle", SubResource( 40 ), "Walk", "Jump", SubResource( 41 ), "Jump", "Walk", SubResource( 42 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=37]

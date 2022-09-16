@@ -1,37 +1,35 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://cfkuoun6envei"]
 
-[ext_resource path="res://player/player.gd" type="Script" id=1]
-[ext_resource path="res://player/camera.gd" type="Script" id=2]
-[ext_resource path="res://player/camera_pivot.gd" type="Script" id=3]
-[ext_resource path="res://spider/spider.tscn" type="PackedScene" id=4]
+[ext_resource type="Script" path="res://player/player.gd" id="1"]
+[ext_resource type="Script" path="res://player/camera.gd" id="2"]
+[ext_resource type="Script" path="res://player/camera_pivot.gd" id="3"]
+[ext_resource type="PackedScene" path="res://spider/spider.tscn" id="4"]
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="SphereShape3D" id="1"]
 radius = 0.1
 
-[node name="Player" type="KinematicBody"]
+[node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-script = ExtResource( 1 )
+script = ExtResource("1")
 
-[node name="CameraPivot" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.196683, 0 )
-script = ExtResource( 3 )
-min_pitch = -60.0
-max_pitch = 60.0
+[node name="CameraPivot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.196683, 0)
+script = ExtResource("3")
 
-[node name="CameraBoom" type="SpringArm" parent="CameraPivot"]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0 )
+[node name="CameraBoom" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 spring_length = 2.0
 
-[node name="CameraMount" type="Position3D" parent="CameraPivot/CameraBoom"]
+[node name="CameraMount" type="Marker3D" parent="CameraPivot/CameraBoom"]
 
-[node name="Spider" parent="." instance=ExtResource( 4 )]
+[node name="Spider" parent="." instance=ExtResource("4")]
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
-shape = SubResource( 1 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("1")
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2.95587, 3.87947 )
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2.95587, 3.87947)
 current = true
 far = 1000.0
-script = ExtResource( 2 )
+script = ExtResource("2")

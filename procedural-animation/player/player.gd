@@ -1,14 +1,14 @@
-extends KinematicBody
+extends CharacterBody3D
 
 var speed = 3
 var acceleration = 9
 var jump_impulse = 6.2
 
 var direction = Vector3.ZERO
-var velocity = Vector3.ZERO
+#var velocity = Vector3.ZERO
 
-onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
-onready var terminal_velocity = ProjectSettings.get("physics/3d/terminal_velocity")
+@onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
+@onready var terminal_velocity = ProjectSettings.get("physics/3d/terminal_velocity")
 
 func _physics_process(delta):
 	direction = Vector3.ZERO
@@ -23,4 +23,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_impulse
 	
-	velocity = move_and_slide(velocity, Vector3.UP, true)
+	set_velocity(velocity)
+	set_up_direction(Vector3.UP)
+	set_floor_stop_on_slope_enabled(true)
+	move_and_slide()
+	velocity = velocity

@@ -1,15 +1,22 @@
-[gd_resource type="Environment" load_steps=2 format=2]
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://clh6m2chst1k1"]
 
-[sub_resource type="ProceduralSky" id=1]
-sky_top_color = Color( 0.337255, 0.580392, 0.866667, 1 )
-ground_bottom_color = Color( 0.337255, 0.580392, 0.866667, 1 )
-ground_horizon_color = Color( 0.839216, 0.917647, 0.980392, 1 )
+[ext_resource type="Texture2D" uid="uid://cjso01y07pr0d" path="res://world/hilly_terrain_01_4k.exr" id="1_ll658"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ux7nh"]
+panorama = ExtResource("1_ll658")
+
+[sub_resource type="Sky" id="1"]
+sky_material = SubResource("PanoramaSkyMaterial_ux7nh")
 
 [resource]
 background_mode = 2
-background_sky = SubResource( 1 )
-ambient_light_color = Color( 0.517647, 0.517647, 0.517647, 1 )
-ambient_light_energy = 2.0
-ambient_light_sky_contribution = 0.25
+sky = SubResource("1")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.2
+ambient_light_energy = 0.46
 tonemap_mode = 3
 tonemap_white = 1.5
+fog_enabled = true
+fog_light_energy = 8.08
+fog_density = 0.001

@@ -1,11 +1,11 @@
-extends Camera
+extends Camera3D
 
-onready var pivot = get_parent().find_node("CameraPivot")
-onready var mount = get_parent().find_node("CameraMount")
+@onready var pivot = get_parent().find_child("CameraPivot")
+@onready var mount = get_parent().find_child("CameraMount")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	set_as_toplevel(true)
+	set_as_top_level(true)
 	
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):

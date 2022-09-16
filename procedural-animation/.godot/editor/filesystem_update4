@@ -1,7 +1,0 @@
-res://world/world.tscn
-res://world/environment.tres
-res://player/player.tscn
-res://player/player.gd
-res://player/camera_pivot.gd
-res://spider/spider.tscn
-res://assets/blocks/dark/dark.tres

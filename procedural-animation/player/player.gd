@@ -5,7 +5,6 @@ var acceleration = 9
 var jump_impulse = 6.2
 
 var direction = Vector3.ZERO
-#var velocity = Vector3.ZERO
 
 @onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 @onready var terminal_velocity = ProjectSettings.get("physics/3d/terminal_velocity")
@@ -27,4 +26,3 @@ func _physics_process(delta):
 	set_up_direction(Vector3.UP)
 	set_floor_stop_on_slope_enabled(true)
 	move_and_slide()
-	velocity = velocity

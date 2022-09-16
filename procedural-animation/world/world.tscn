@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://tkyi16ueq5lo"]
 
 [ext_resource type="Environment" uid="uid://dn58bx31b4y8u" path="res://world/environment.tres" id="1"]
-[ext_resource type="Material" path="res://assets/blocks/dark/dark.tres" id="2"]
+[ext_resource type="Material" path="res://assets/blocks/light/light.tres" id="1_l0mer"]
 [ext_resource type="PackedScene" uid="uid://cfkuoun6envei" path="res://player/player.tscn" id="3"]
 
 [node name="World3D" type="Node3D"]
@@ -23,17 +23,7 @@ use_collision = true
 [node name="Floor" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
-material = ExtResource("2")
-
-[node name="Wall" type="CSGBox3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -16)
-use_collision = true
-material = ExtResource("2")
-
-[node name="Cave" type="CSGBox3D" parent="Level/Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.991, 0)
-operation = 2
-use_collision = true
-material = ExtResource("2")
+size = Vector3(400, 1, 400)
+material = ExtResource("1_l0mer")
 
 [node name="Player" parent="." instance=ExtResource("3")]

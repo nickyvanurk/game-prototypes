@@ -25,4 +25,5 @@ Pixelation shader
 ## Todo
 
 - [ ] Upgrade projects to Godot 4
+  - [x] Basic Scene
 - [ ] Create video tutorials for each project

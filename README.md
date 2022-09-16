@@ -19,7 +19,8 @@ Procedural biome generation\
 Infinite terrain\
 Jetpack\
 Swimming\
-Gliding
+Gliding\
+Pixelation shader
 
 ## Todo
 

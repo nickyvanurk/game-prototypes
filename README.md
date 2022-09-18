@@ -20,7 +20,8 @@ Infinite terrain\
 Jetpack\
 Swimming\
 Gliding\
-Pixelation shader
+Pixelation shader\
+Vehicles
 
 ## Todo
 

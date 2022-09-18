@@ -13,9 +13,12 @@ extends Marker3D
 @onready var zoom = $CameraBoom.spring_length
 @onready var boom = $CameraBoom
 
+func _ready():
+	set_as_top_level(true)
+
 func _input(event):
 	if event is InputEventMouseMotion:
-		parent.rotation.y -= deg_to_rad(event.relative.x * mouse_sensitivity)
+		rotation.y -= deg_to_rad(event.relative.x * mouse_sensitivity)
 		rotation.x -= deg_to_rad(event.relative.y * mouse_sensitivity)
 		rotation.x = clampf(rotation.x, deg_to_rad(min_pitch), deg_to_rad(max_pitch))
 	
@@ -24,6 +27,9 @@ func _input(event):
 
 	if event.is_action_pressed("zoom_out"):
 		set_zoom(zoom + zoom_step)
+
+func _physics_process(delta):
+	position = parent.position
 
 func set_zoom(value):
 	zoom = clamp(value, min_zoom, max_zoom)

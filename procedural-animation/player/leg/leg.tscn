@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://mseef47his28"]
+
+[ext_resource type="Script" path="res://player/leg/bone.gd" id="1_1s5la"]
+[ext_resource type="Script" path="res://player/leg/leg.gd" id="1_csvmw"]
+[ext_resource type="Script" path="res://player/leg/target.gd" id="1_t2cvn"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_vw20s"]
+radius = 0.07
+height = 0.14
+
+[sub_resource type="BoxMesh" id="BoxMesh_piauw"]
+size = Vector3(0.07, 0.07, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lwa4r"]
+size = Vector3(0.06, 0.06, 0.2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o7jh2"]
+top_radius = 0.0
+bottom_radius = 0.03
+height = 0.1
+
+[node name="Leg" type="Node3D"]
+script = ExtResource("1_csvmw")
+
+[node name="Socket" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_vw20s")
+
+[node name="Bone1" type="Node3D" parent="."]
+script = ExtResource("1_1s5la")
+length = 0.15
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="Bone1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.075)
+mesh = SubResource("BoxMesh_piauw")
+skeleton = NodePath("../..")
+
+[node name="Bone2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.15)
+script = ExtResource("1_1s5la")
+length = 0.2
+
+[node name="MeshInstance3d2" type="MeshInstance3D" parent="Bone2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+mesh = SubResource("BoxMesh_lwa4r")
+skeleton = NodePath("../..")
+
+[node name="Bone3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.35)
+script = ExtResource("1_1s5la")
+length = 0.1
+
+[node name="MeshInstance3d3" type="MeshInstance3D" parent="Bone3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.05)
+mesh = SubResource("CylinderMesh_o7jh2")
+skeleton = NodePath("../..")
+
+[node name="Pole" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.3)
+
+[node name="Target" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
+script = ExtResource("1_t2cvn")
+
+[node name="TargetRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.3)

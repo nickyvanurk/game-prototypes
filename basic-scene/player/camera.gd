@@ -7,5 +7,7 @@ func _ready():
 	set_as_top_level(true)
 
 func _process(delta):
-	transform.origin = lerp(global_transform.origin, mount.global_transform.origin, 0.5)
+	transform.origin = global_transform.origin.slerp(mount.global_transform.origin, min(delta*30, 1.0))
 	look_at(pivot.global_transform.origin, Vector3.UP)
+
+

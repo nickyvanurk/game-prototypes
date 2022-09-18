@@ -24,6 +24,7 @@ spring_length = 4.0
 margin = 0.2
 
 [node name="CameraMount" type="Marker3D" parent="CameraPivot/CameraBoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2.95587, 3.87947)

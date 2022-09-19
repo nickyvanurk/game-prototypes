@@ -33,4 +33,4 @@ func _physics_process(delta):
 	for leg in legs:
 		if leg.should_step():
 			var leg_direction = velocity.normalized()
-			leg.step(leg_direction)
+			leg.step(leg_direction, 0, 0)

@@ -22,7 +22,7 @@ func _process(delta):
 	if time <= 1.0:
 		var mid_point = (origin + destination) / 2
 		mid_point.y += STEP_HEIGHT
-		target.global_transform.origin = _quadratic_bezier(origin, mid_point, destination, time)
+		target.global_transform.origin = origin.bezier_interpolate(mid_point, mid_point, destination, time)
 	elif origin != destination:
 		origin = destination
 	
@@ -44,14 +44,9 @@ func should_step():
 			return true
 	return false
 
-func step(direction):
+func step(direction, distance, time):
 	var dest = ray.get_collision_point() + direction.normalized() * STEP_DISTANCE
 	move_to_position(dest)
-
-func _quadratic_bezier(p0: Vector3, p1: Vector3, p2: Vector3, t: float):
-	var q0 = p0.lerp(p1, t)
-	var q1 = p1.lerp(p2, t)
-	return q0.lerp(q1, t)
 
 func _solve():
 	if bones.size() > 2:

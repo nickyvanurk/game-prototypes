@@ -26,7 +26,7 @@ script = ExtResource("1_csvmw")
 mesh = SubResource("SphereMesh_vw20s")
 
 [node name="Bone1" type="Node3D" parent="."]
-transform = Transform3D(-0.99983, -6.90126e-08, -5.36438e-08, 0, 0.613611, -0.789416, 8.74079e-08, -0.789412, -0.613613, 0, 0, 0)
+transform = Transform3D(-0.999834, -7.52842e-08, -4.44157e-08, 0, 0.508051, -0.86116, 8.74083e-08, -0.861151, -0.508057, 0, 0, 0)
 script = ExtResource("1_1s5la")
 length = 0.15
 
@@ -36,7 +36,7 @@ mesh = SubResource("BoxMesh_piauw")
 skeleton = NodePath("../..")
 
 [node name="Bone2" type="Node3D" parent="."]
-transform = Transform3D(-0.999836, 5.64024e-08, -6.67792e-08, 0, 0.763861, 0.645172, 8.74084e-08, 0.645169, -0.763865, 0, 0.11843, 0.0920559)
+transform = Transform3D(-0.999835, 3.75358e-08, -7.89411e-08, 0, 0.902975, 0.429363, 8.74083e-08, 0.42936, -0.902981, 0, 0.129192, 0.0762193)
 script = ExtResource("1_1s5la")
 length = 0.2
 
@@ -46,7 +46,7 @@ mesh = SubResource("BoxMesh_lwa4r")
 skeleton = NodePath("../..")
 
 [node name="Bone3" type="Node3D" parent="."]
-transform = Transform3D(0.999839, 0, 0, 0, 0.44842, 0.893652, 0, -0.893648, 0.448422, 0, -0.0106212, 0.244849)
+transform = Transform3D(0.999841, 0, 0, 0, 0.568314, 0.822626, 0, -0.822626, 0.568315, 0, 0.0433079, 0.25684)
 script = ExtResource("1_1s5la")
 length = 0.1
 
@@ -56,11 +56,11 @@ mesh = SubResource("CylinderMesh_o7jh2")
 skeleton = NodePath("../..")
 
 [node name="Pole" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.1)
 
 [node name="Target" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0389672, 0.2)
 script = ExtResource("1_t2cvn")
 
-[node name="Goal" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.3)
+[node name="Ray" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.25)

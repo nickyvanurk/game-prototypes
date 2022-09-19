@@ -7,6 +7,8 @@ extends CharacterBody3D
 @onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 @onready var terminal_velocity = ProjectSettings.get("physics/3d/terminal_velocity")
 
+@onready var legs = $CollisionShape3D/Body/Legs.get_children()
+
 func _physics_process(delta):
 	var camera_basis = $Camera3D.transform.basis
 	var input = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_forward", "move_backward"))
@@ -27,3 +29,8 @@ func _physics_process(delta):
 		var q_from = global_transform.basis.get_rotation_quaternion()
 		var q_to = Transform3D().looking_at(direction).basis.get_rotation_quaternion()
 		global_transform.basis = Basis(q_from.slerp(q_to, 5 * delta))
+	
+	for leg in legs:
+		if leg.should_step():
+			var leg_direction = velocity.normalized()
+			leg.step(leg_direction)

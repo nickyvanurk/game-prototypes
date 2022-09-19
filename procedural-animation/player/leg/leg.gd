@@ -4,7 +4,7 @@ extends Node3D
 
 const CHAIN_MAX_ITER = 3
 const STEP_DISTANCE = 0.1
-const STEP_HEIGHT = 0.4
+const STEP_HEIGHT = 0.3
 
 @onready var bones = [$Bone1, $Bone2, $Bone3]
 @onready var target = $Target
@@ -45,8 +45,20 @@ func should_step():
 	return false
 
 func step(direction, distance, time):
-	var dest = ray.get_collision_point() + direction.normalized() * STEP_DISTANCE
+	var dest = ray.get_collision_point() + direction.normalized() * distance
 	move_to_position(dest)
+#	destination = dest
+#	origin = Vector3(target.global_transform.origin)
+#	var tween = create_tween()
+#	tween.tween_method(tween_curve, 0.0, 1.0, time)
+
+#func tween_curve(t):
+#	var mid_point = (origin + destination) / 2
+#	mid_point.y += STEP_HEIGHT
+#	var mid_point = origin.slerp(destination, 0.5)
+#	mid_point.y += 0.1
+#	target.global_transform.origin = origin.bezier_interpolate(mid_point, mid_point, destination, t)
+#	target.global_transform.origin = origin.slerp(destination, t)
 
 func _solve():
 	if bones.size() > 2:

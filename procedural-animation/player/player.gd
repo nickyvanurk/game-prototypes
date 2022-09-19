@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var speed = 3
+@export var speed = 0.3
 @export var acceleration = 9
 @export var jump_impulse = 6.2
 
@@ -30,7 +30,12 @@ func _physics_process(delta):
 		var q_to = Transform3D().looking_at(direction).basis.get_rotation_quaternion()
 		global_transform.basis = Basis(q_from.slerp(q_to, 5 * delta))
 	
-	for leg in legs:
-		if leg.should_step():
+	for idx in range(0, legs.size()):
+		var leg = legs[idx]
+		if !leg.is_moving() && leg.should_step() && !legs[(idx + 1) % 4].is_moving():
 			var leg_direction = velocity.normalized()
-			leg.step(leg_direction, 0, 0)
+			var leg_step_duration = 0.5
+			var leg_step_distance = 0.1
+			leg.step(leg_direction, leg_step_distance, leg_step_duration)
+			leg = legs[(idx + 2) % 4]
+			leg.step(leg_direction, leg_step_distance, leg_step_duration)

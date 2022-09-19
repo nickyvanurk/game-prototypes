@@ -26,6 +26,7 @@ script = ExtResource("1_csvmw")
 mesh = SubResource("SphereMesh_vw20s")
 
 [node name="Bone1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.704213, 0.709989, 0, -0.709989, 0.704213, 0, 0, 0)
 script = ExtResource("1_1s5la")
 length = 0.15
 
@@ -35,7 +36,7 @@ mesh = SubResource("BoxMesh_piauw")
 skeleton = NodePath("../..")
 
 [node name="Bone2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.15)
+transform = Transform3D(1, 0, 0, 0, 0.711069, -0.703122, 0, 0.703122, 0.711069, 0, 0.117568, 0.110122)
 script = ExtResource("1_1s5la")
 length = 0.2
 
@@ -45,12 +46,12 @@ mesh = SubResource("BoxMesh_lwa4r")
 skeleton = NodePath("../..")
 
 [node name="Bone3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.35)
+transform = Transform3D(1, 0, 0, 0, 0.816591, -0.577216, 0, 0.577216, 0.816591, 0, -0.0360696, 0.304423)
 script = ExtResource("1_1s5la")
 length = 0.1
 
 [node name="MeshInstance3d3" type="MeshInstance3D" parent="Bone3"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.05)
+transform = Transform3D(1, 0, 0, 0, -0.347411, -0.937714, 0, 0.937714, -0.347411, 0, -0.0325163, -0.00558415)
 mesh = SubResource("CylinderMesh_o7jh2")
 skeleton = NodePath("../..")
 

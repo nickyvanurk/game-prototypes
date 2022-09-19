@@ -12,6 +12,7 @@ extends Marker3D
 @onready var parent = get_parent()
 @onready var zoom = $CameraBoom.spring_length
 @onready var boom = $CameraBoom
+@onready var body = $Body
 
 func _ready():
 	set_as_top_level(true)
@@ -30,6 +31,7 @@ func _input(event):
 
 func _physics_process(delta):
 	position = parent.position
+	position.y += 0.2
 
 func set_zoom(value):
 	zoom = clamp(value, min_zoom, max_zoom)

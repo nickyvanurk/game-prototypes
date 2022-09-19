@@ -18,10 +18,6 @@ func _physics_process(delta):
 	
 	velocity.x = velocity.x + (direction.x * speed - velocity.x) * (acceleration * delta)
 	velocity.z = velocity.z + (direction.z * speed - velocity.z) * (acceleration * delta)
-	velocity.y = clamp(velocity.y - (gravity * delta), -terminal_velocity, terminal_velocity)
-	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_impulse
 	
 	move_and_slide()
 

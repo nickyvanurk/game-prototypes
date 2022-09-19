@@ -12,7 +12,6 @@ extends Marker3D
 @onready var parent = get_parent()
 @onready var zoom = $CameraBoom.spring_length
 @onready var boom = $CameraBoom
-@onready var body = $Body
 
 func _ready():
 	set_as_top_level(true)

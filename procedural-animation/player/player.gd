@@ -2,7 +2,6 @@ extends CharacterBody3D
 
 @export var speed = 0.6
 @export var acceleration = 9
-@export var jump_impulse = 6.2
 
 @onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 @onready var terminal_velocity = ProjectSettings.get("physics/3d/terminal_velocity")
@@ -27,10 +26,9 @@ func _physics_process(delta):
 #		global_transform.basis = Basis(q_from.slerp(q_to, 5 * delta))
 	
 	var dir = velocity.normalized()
-	var speed_frac = velocity.length() / speed
 	if !legs[0].is_moving && !legs[2].is_moving:
-		legs[1].step(dir, speed_frac, delta)
-		legs[3].step(dir, speed_frac, delta)
+		legs[1].step(dir, delta)
+		legs[3].step(dir, delta)
 	if !legs[1].is_moving && !legs[3].is_moving:
-		legs[0].step(dir, speed_frac, delta)
-		legs[2].step(dir, speed_frac, delta)
+		legs[0].step(dir, delta)
+		legs[2].step(dir, delta)

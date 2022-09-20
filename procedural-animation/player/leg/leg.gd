@@ -11,7 +11,6 @@ const CHAIN_MAX_ITER = 3
 
 @export var step_distance = 0.1
 @export var step_duration = 0.2
-@export var step_overshoot_fraction = 1.25
 
 var is_moving = false
 var time = 0.0
@@ -22,7 +21,7 @@ var end_point = Vector3()
 func _process(delta):
 	_solve()
 
-func step(direction, speed_frac, delta):
+func step(direction, delta):
 	if !home_ray.is_colliding():
 		return
 	
@@ -31,22 +30,17 @@ func step(direction, speed_frac, delta):
 	if distance > step_distance:
 		if !is_moving:
 			is_moving = true
-			
-			# TODO: Rework later. Find good solution to match movement to speed
-			step_distance = speed_frac / 6
-			
-			start_point = target.global_position
-			var overshoot_distance = step_distance * step_overshoot_fraction
-			var overshoot_vector = direction * overshoot_distance
-			var overshoot_ray_position = home_position + overshoot_vector
-			overshoot_ray_position.y = overshoot_ray.global_position.y
-			overshoot_ray.global_position = overshoot_ray_position
-			end_point = overshoot_ray.get_collision_point()
-			center_point = (start_point + end_point) / 2
-			center_point += home_ray.get_collision_normal() * start_point.distance_to(end_point) / 2.0
 	
 	if is_moving:
 		time += delta
+		
+		start_point = target.global_position
+		var overshoot_ray_position = home_position + direction * step_distance
+		overshoot_ray_position.y = overshoot_ray.global_position.y
+		overshoot_ray.global_position = overshoot_ray_position
+		end_point = overshoot_ray.get_collision_point()
+		center_point = (start_point + end_point) / 2
+		center_point += home_ray.get_collision_normal() * start_point.distance_to(end_point) / 2.0
 		
 		var normalized_time = time / step_duration
 		# Quadratic bezier curve

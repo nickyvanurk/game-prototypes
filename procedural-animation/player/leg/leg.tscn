@@ -26,7 +26,7 @@ script = ExtResource("1_csvmw")
 mesh = SubResource("SphereMesh_vw20s")
 
 [node name="Bone1" type="Node3D" parent="."]
-transform = Transform3D(-0.999834, -7.52842e-08, -4.44157e-08, 0, 0.508051, -0.86116, 8.74083e-08, -0.861151, -0.508057, 0, 0, 0)
+transform = Transform3D(-0.999834, -8.53902e-08, -1.86804e-08, 0, 0.213676, -0.97676, 8.74083e-08, -0.97675, -0.213679, 0, 0, 0)
 script = ExtResource("1_1s5la")
 length = 0.15
 
@@ -36,7 +36,7 @@ mesh = SubResource("BoxMesh_piauw")
 skeleton = NodePath("../..")
 
 [node name="Bone2" type="Node3D" parent="."]
-transform = Transform3D(-0.999835, 3.75358e-08, -7.89411e-08, 0, 0.902975, 0.429363, 8.74083e-08, 0.42936, -0.902981, 0, 0.129192, 0.0762193)
+transform = Transform3D(-0.999835, -4.81521e-08, -7.2952e-08, 0, 0.834468, -0.5508, 8.74084e-08, -0.550796, -0.834474, 0, 0.146535, 0.0320563)
 script = ExtResource("1_1s5la")
 length = 0.2
 
@@ -46,7 +46,7 @@ mesh = SubResource("BoxMesh_lwa4r")
 skeleton = NodePath("../..")
 
 [node name="Bone3" type="Node3D" parent="."]
-transform = Transform3D(0.999841, 0, 0, 0, 0.568314, 0.822626, 0, -0.822626, 0.568315, 0, 0.0433079, 0.25684)
+transform = Transform3D(-0.999841, 8.74048e-08, -8.93737e-10, 0, 0.0102232, 0.999796, 8.74089e-08, 0.999795, -0.0102232, 0, 0.25671, 0.198974)
 script = ExtResource("1_1s5la")
 length = 0.1
 
@@ -59,8 +59,11 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.1)
 
 [node name="Target" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0389672, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
 script = ExtResource("1_t2cvn")
 
-[node name="Ray" type="RayCast3D" parent="."]
+[node name="HomeRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.25)
+
+[node name="OvershootRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.25)

@@ -7,6 +7,7 @@ extends CharacterBody3D
 @onready var terminal_velocity = ProjectSettings.get("physics/3d/terminal_velocity")
 
 @onready var legs = $CollisionShape3D/Body/Legs.get_children()
+@onready var body = $CollisionShape3D/Body
 
 func _physics_process(delta):
 	var camera_basis = $Camera3D.transform.basis
@@ -32,3 +33,14 @@ func _physics_process(delta):
 	if !legs[1].is_moving && !legs[3].is_moving:
 		legs[0].step(dir, delta)
 		legs[2].step(dir, delta)
+		
+#	var total = Vector3.ZERO;
+#	for leg in legs:
+#		total += leg.target.global_position
+#	total /= legs.size()
+#	global_position.y = global_position.lerp(total - global_position, 0.2).y
+#
+#	var normal = (legs[0].target.global_position - legs[2].target.global_position).cross(legs[1].target.global_position - legs[3].target.global_position).normalized()
+#	global_transform.basis.y = normal
+#	global_transform.basis.x = -global_transform.basis.z.cross(normal)
+#	global_transform.basis = global_transform.basis.orthonormalized()

@@ -11,6 +11,7 @@ const CHAIN_MAX_ITER = 3
 
 @export var step_distance = 0.1
 @export var step_duration = 0.2
+@export var overshoot_fraction = 1.25
 
 var is_moving = false
 var time = 0.0
@@ -30,12 +31,12 @@ func step(direction, delta):
 	if distance > step_distance:
 		if !is_moving:
 			is_moving = true
-	
+
 	if is_moving:
 		time += delta
 		
 		start_point = target.global_position
-		var overshoot_ray_position = home_position + direction * step_distance
+		var overshoot_ray_position = home_position + direction * (step_distance * overshoot_fraction)
 		overshoot_ray_position.y = overshoot_ray.global_position.y
 		overshoot_ray.global_position = overshoot_ray_position
 		end_point = overshoot_ray.get_collision_point()

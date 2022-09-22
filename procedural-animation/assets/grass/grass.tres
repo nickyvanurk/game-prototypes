@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://6judhp8phmxb"]
+
+[ext_resource type="Texture2D" uid="uid://e5h8xqc5nayk" path="res://assets/grass/Grass004_1K_Color.png" id="1_lvi5v"]
+[ext_resource type="Texture2D" uid="uid://vc1qgp2ark3l" path="res://assets/grass/Grass004_1K_Displacement.png" id="2_aeont"]
+[ext_resource type="Texture2D" uid="uid://5ys1xr2o6iur" path="res://assets/grass/Grass004_1K_AmbientOcclusion.png" id="2_hlfhx"]
+[ext_resource type="Texture2D" uid="uid://ccqjvl0t45ya1" path="res://assets/grass/Grass004_1K_NormalDX.png" id="4_xd1sn"]
+
+[resource]
+albedo_texture = ExtResource("1_lvi5v")
+normal_enabled = true
+normal_texture = ExtResource("4_xd1sn")
+ao_enabled = true
+ao_texture = ExtResource("2_hlfhx")
+heightmap_texture = ExtResource("2_aeont")
+uv1_scale = Vector3(0.57, 0.57, 0.57)
+uv1_triplanar = true

@@ -1,9 +1,13 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://upeqkxkhht8"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://upeqkxkhht8"]
 
-[ext_resource type="Texture2D" uid="uid://uinqx0n1p4ls" path="res://assets/blocks/light/texture_08.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dnupc2joq88eh" path="res://assets/blocks/light/DebugTexBright.png" id="1_bcddj"]
+[ext_resource type="Texture2D" uid="uid://fhgnbol47txs" path="res://assets/blocks/light/DebugNorm.bmp" id="2_f5ttg"]
 
 [resource]
-albedo_texture = ExtResource("1")
-metallic = 0.6
+albedo_texture = ExtResource("1_bcddj")
+normal_enabled = true
+normal_scale = 4.58
+normal_texture = ExtResource("2_f5ttg")
+clearcoat_roughness = 1.0
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true

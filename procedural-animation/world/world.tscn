@@ -33,10 +33,37 @@ material = ExtResource("2")
 [node name="Player" parent="." instance=ExtResource("3")]
 
 [node name="StaticBody3d" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.36303, -3)
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="StaticBody3d"]
 shape = SubResource("SphereShape3D_76ea4")
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="StaticBody3d/CollisionShape3d"]
+mesh = SubResource("SphereMesh_k862b")
+
+[node name="StaticBody3d2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.363026, -5)
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="StaticBody3d2"]
+shape = SubResource("SphereShape3D_76ea4")
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="StaticBody3d2/CollisionShape3d"]
+mesh = SubResource("SphereMesh_k862b")
+
+[node name="StaticBody3d3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63697, -7)
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="StaticBody3d3"]
+shape = SubResource("SphereShape3D_76ea4")
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="StaticBody3d3/CollisionShape3d"]
+mesh = SubResource("SphereMesh_k862b")
+
+[node name="StaticBody3d4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.63697, -10)
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="StaticBody3d4"]
+shape = SubResource("SphereShape3D_76ea4")
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="StaticBody3d4/CollisionShape3d"]
 mesh = SubResource("SphereMesh_k862b")

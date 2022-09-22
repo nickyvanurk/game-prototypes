@@ -39,6 +39,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.36303, -3)
 shape = SubResource("SphereShape3D_76ea4")
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="StaticBody3d/CollisionShape3d"]
+material_override = ExtResource("2")
 mesh = SubResource("SphereMesh_k862b")
 
 [node name="StaticBody3d2" type="StaticBody3D" parent="."]
@@ -48,6 +49,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.363026, -5)
 shape = SubResource("SphereShape3D_76ea4")
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="StaticBody3d2/CollisionShape3d"]
+material_override = ExtResource("2")
 mesh = SubResource("SphereMesh_k862b")
 
 [node name="StaticBody3d3" type="StaticBody3D" parent="."]
@@ -57,6 +59,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63697, -7)
 shape = SubResource("SphereShape3D_76ea4")
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="StaticBody3d3/CollisionShape3d"]
+material_override = ExtResource("2")
 mesh = SubResource("SphereMesh_k862b")
 
 [node name="StaticBody3d4" type="StaticBody3D" parent="."]
@@ -66,4 +69,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.63697, -10)
 shape = SubResource("SphereShape3D_76ea4")
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="StaticBody3d4/CollisionShape3d"]
+material_override = ExtResource("2")
 mesh = SubResource("SphereMesh_k862b")

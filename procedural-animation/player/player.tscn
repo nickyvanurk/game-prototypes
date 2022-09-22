@@ -70,4 +70,5 @@ transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -0.08, 0
 script = ExtResource("5_7u64n")
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_c6666")

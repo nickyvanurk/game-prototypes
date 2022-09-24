@@ -34,7 +34,7 @@ func step(direction, delta):
 		start_point = target.global_position
 		var overshoot_ray_position = home_position + direction * (step_distance * overshoot_fraction)
 		overshoot_ray_position.y = overshoot_ray.global_position.y
-#		overshoot_ray.global_position = overshoot_ray_position
+		overshoot_ray.global_position = overshoot_ray_position
 		end_point = overshoot_ray.get_collision_point()
 		center_point = (start_point + end_point) / 2
 		center_point += home_ray.get_collision_normal() * start_point.distance_to(end_point) / 2.0

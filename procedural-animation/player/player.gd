@@ -25,7 +25,7 @@ func _physics_process(delta):
 #		var q_to = Transform3D().looking_at(direction).basis.get_rotation_quaternion()
 #		global_transform.basis = Basis(q_from.slerp(q_to, 5 * delta))
 	
-	var dir = velocity.normalized()
+	var dir = (velocity * transform.basis.inverse()).normalized()
 	if !legs[0].is_moving && !legs[2].is_moving:
 		legs[1].step(dir, delta)
 		legs[3].step(dir, delta)

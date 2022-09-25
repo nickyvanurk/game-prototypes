@@ -2,7 +2,7 @@ extends Node3D
 
 @export var step_distance = 0.1
 @export var step_duration = 0.2
-@export var overshoot_fraction = 1.25
+@export var overshoot_fraction = 1
 
 @onready var target = $Target
 @onready var ik = IK.new([$Bone1, $Bone2, $Bone3], target, $Pole)
@@ -24,7 +24,7 @@ func step(direction, delta):
 	
 	var home_position = home_ray.get_collision_point()
 	var distance = target.global_position.distance_to(home_position)
-	if distance > step_distance:
+	if distance > step_distance * overshoot_fraction:
 		if !is_moving:
 			is_moving = true
 
@@ -32,9 +32,7 @@ func step(direction, delta):
 		time += delta
 		
 		start_point = target.global_position
-		var overshoot_ray_position = home_position + direction * (step_distance * overshoot_fraction)
-		overshoot_ray_position.y = overshoot_ray.global_position.y
-		overshoot_ray.global_position = overshoot_ray_position
+		overshoot_ray.global_position = home_ray.global_position + direction * step_distance * overshoot_fraction
 		end_point = overshoot_ray.get_collision_point()
 		center_point = (start_point + end_point) / 2
 		center_point += home_ray.get_collision_normal() * start_point.distance_to(end_point) / 2.0

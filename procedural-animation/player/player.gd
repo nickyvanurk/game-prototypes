@@ -2,12 +2,13 @@ extends CharacterBody3D
 
 @export var speed = 1
 @export var acceleration = 9
+@export var rotation_speed = 120 # deg/s
 
 @onready var legs = $CollisionShape3D/Body/Legs.get_children()
 @onready var body = $CollisionShape3D/Body
+@onready var camera_pivot = $CameraPivot
 
 func _physics_process(delta):
-	var camera_basis = $Camera3D.transform.basis
 	var input = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_forward", "move_backward"))
 	var direction = Vector3(input.x, 0, input.y)
 	direction.y = 0
@@ -17,6 +18,8 @@ func _physics_process(delta):
 	velocity.z = velocity.z + (direction.z * speed - velocity.z) * (acceleration * delta)
 	
 	global_position += velocity * transform.basis.inverse() * delta
+	
+	rotate_object_local(Vector3.UP, deg_to_rad(-Input.get_axis("turn_left", "turn_right") * rotation_speed * delta))
 	
 #	move_and_collide(velocity * delta)
 	

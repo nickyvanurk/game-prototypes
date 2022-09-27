@@ -9,7 +9,8 @@ Game prototypes made in the Godot engine.
 [Object Interaction](object-interaction/)\
 [Inverse Kinematics](inverse-kinematics/)\
 [Drag and Drop](drag-and-drop/)\
-[Gizmo](gizmo/)
+[Gizmo](gizmo/)\
+[Procedural Animation](procedural-animation/)
 
 ## Future Ideas
 
@@ -28,4 +29,5 @@ Grass
 
 - [ ] Upgrade projects to Godot 4
   - [x] Basic Scene
+  - [x] Procedural Animation
 - [ ] Create video tutorials for each project

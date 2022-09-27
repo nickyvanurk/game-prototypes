@@ -23,7 +23,9 @@ Swimming\
 Gliding\
 Pixelation shader\
 Vehicles\
-Grass
+Grass\
+Poisson-Disc Sampling\
+Flying vampire
 
 ## Todo
 

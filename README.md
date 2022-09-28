@@ -25,7 +25,9 @@ Pixelation shader\
 Vehicles\
 Grass\
 Poisson-Disc Sampling\
-Flying vampire
+Flying vampire\
+Hot air balloon\
+Clouds
 
 ## Todo
 

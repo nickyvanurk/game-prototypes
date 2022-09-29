@@ -8,6 +8,11 @@ extends CharacterBody3D
 @onready var body = $CollisionShape3D/Body
 @onready var camera_pivot = $CameraPivot
 
+func _process(delta):
+	var points = []
+	for leg in legs:
+		Debug.create_sphere(leg.target.global_position)
+
 func _physics_process(delta):
 	var input = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_forward", "move_backward"))
 	var direction = Vector3(input.x, 0, input.y)

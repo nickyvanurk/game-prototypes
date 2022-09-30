@@ -2,8 +2,6 @@ extends Node
 
 @onready var mesh: ImmediateMesh = $Shapes.mesh
 
-var shapes = []
-
 func _ready():
 	set_process_priority(-1)
 
@@ -11,62 +9,48 @@ func _input(event):
 	if event is InputEventKey:
 		if event.is_action_pressed("toggle_debug"):
 			get_tree().debug_collisions_hint = !get_tree().debug_collisions_hint
-			clear()
-			get_tree().reload_current_scene()
-		
+			mesh.clear_surfaces()
+			get_viewport().debug_draw = Viewport.DEBUG_DRAW_DISABLED
+
 		if get_tree().debug_collisions_hint:
 			if event.is_action_pressed("toggle_viewport_mode"):
-				get_viewport().debug_draw += 4 # Viewport.DEBUG_DRAW_WIREFRAME = 4
-				get_viewport().debug_draw %= 5 # 4, 3, 2, 1, 0 -> repeat
+				# Viewport.DEBUG_DRAW_WIREFRAME = 4
+				get_viewport().debug_draw ^= 1 << 2; # Toggle third bit (4)
 
 func _process(delta):
 	if !get_tree().debug_collisions_hint:
 		return
 
-	clear()
+	mesh.clear_surfaces()
 
-func create_line(points: Array) -> void:
+func draw_line(points: Array, color: Color = Color.RED) -> void:
 	if !get_tree().debug_collisions_hint:
 		return
 
 	if points == null || points.size() <= 1:
 		return
-	
-	mesh.clear_surfaces()
+		
 	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-	
+	mesh.surface_set_color(color)
 	for p in points:
 		mesh.surface_add_vertex(p)
-	
 	mesh.surface_end()
 
-func create_sphere(position: Vector3, color: Color = Color.RED, radius: float = 0.03) -> void:
+func draw_sphere(position: Vector3, color: Color = Color.RED, radius: float = 0.04) -> void:
 	if !get_tree().debug_collisions_hint:
 		return
 
-	# So we can see the target in the editor, let's create a mesh instance,
-	# Add it as our child, and name it
-	var indicator = MeshInstance3D.new()
-	add_child(indicator)
-	indicator.global_position = position
-
-	var indicator_mesh = SphereMesh.new()
-	indicator_mesh.radius = radius
-	indicator_mesh.height = radius * 2
-	indicator_mesh.radial_segments = 8
-	indicator_mesh.rings = 4
-
-	# The mesh needs a material (unless we want to use the defualt one).
-	# Let's create a material and use the EditorGizmoTexture to texture it.
-	var indicator_material = StandardMaterial3D.new()
-	indicator_material.flags_unshaded = true
-#	indicator_material.albedo_texture = preload("editor_gizmo_texture.png")
-	indicator_material.albedo_color = color
-	indicator_mesh.material = indicator_material
-	indicator.mesh = indicator_mesh
-	shapes.append(indicator)
-
-func clear():
-	for shape in shapes:
-		shape.queue_free()
-	shapes.clear()
+	var step = 15
+	var sppi = 2 * PI / step
+	var axes = [
+		[Vector3.UP, Vector3.RIGHT],
+		[Vector3.RIGHT, Vector3.FORWARD],
+		[Vector3.FORWARD, Vector3.UP]
+	]
+	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	mesh.surface_set_color(color)
+	for axis in axes:
+		for i in range(step + 1):
+			mesh.surface_add_vertex(position + (axis[0] * radius)
+				.rotated(axis[1], sppi * (i % step)))
+	mesh.surface_end()

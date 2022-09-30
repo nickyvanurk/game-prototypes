@@ -6,12 +6,9 @@ extends CharacterBody3D
 
 @onready var legs = $CollisionShape3D/Body/Legs.get_children()
 @onready var body = $CollisionShape3D/Body
+@onready var shape = $CollisionShape3D
+@onready var shape_offset = shape.position
 @onready var camera_pivot = $CameraPivot
-
-func _process(delta):
-	var points = []
-	for leg in legs:
-		Debug.create_sphere(leg.target.global_position)
 
 func _physics_process(delta):
 	var input = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_forward", "move_backward"))
@@ -43,11 +40,15 @@ func _physics_process(delta):
 
 	var avg_surface_dist = 0.0
 	for leg in legs:
-		avg_surface_dist += to_local(leg.target.global_position).y
+		avg_surface_dist += shape.to_local(leg.target.global_position).y
 	avg_surface_dist /= legs.size()
-	translate_object_local(Vector3(0, avg_surface_dist, 0))
+	shape.translate_object_local(shape_offset + Vector3(0, avg_surface_dist, 0))
 	
 	var normal = (legs[0].target.global_position - legs[2].target.global_position).cross(legs[1].target.global_position - legs[3].target.global_position).normalized()
 	transform.basis.y = normal
 	transform.basis.x = -transform.basis.z.cross(normal)
 	transform.basis = transform.basis.orthonormalized()
+
+	for leg in legs:
+		leg.home_ray.force_raycast_update()
+		leg.overshoot_ray.force_raycast_update()

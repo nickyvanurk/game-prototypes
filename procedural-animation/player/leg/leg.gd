@@ -17,6 +17,14 @@ var end_point = Vector3()
 
 func _process(delta):
 	ik.solve()
+	
+	Debug.draw_sphere(target.global_position, Color.BLUE, 0.02)
+	
+	var r = global_transform.basis.inverse()
+	Debug.draw_line([home_ray.global_position, home_ray.global_position + home_ray.target_position * r])
+	Debug.draw_line([overshoot_ray.global_position, overshoot_ray.global_position + overshoot_ray.target_position * r], Color.YELLOW)
+	Debug.draw_sphere(home_ray.get_collision_point(), Color.RED, 0.02)
+	Debug.draw_sphere(overshoot_ray.get_collision_point(), Color.YELLOW, 0.02)
 
 func step(direction, delta):
 	if !home_ray.is_colliding():

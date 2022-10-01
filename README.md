@@ -27,7 +27,8 @@ Grass\
 Poisson-Disc Sampling\
 Flying vampire\
 Hot air balloon\
-Clouds
+Clouds\
+Debug tool
 
 ## Todo
 

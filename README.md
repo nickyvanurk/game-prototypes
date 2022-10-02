@@ -28,7 +28,8 @@ Poisson-Disc Sampling\
 Flying vampire\
 Hot air balloon\
 Clouds\
-Debug tool
+Debug tool\
+Inventory
 
 ## Todo
 

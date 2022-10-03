@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://mseef47his28"]
+[gd_scene load_steps=8 format=3 uid="uid://mseef47his28"]
 
 [ext_resource type="Script" path="res://player/leg/bone.gd" id="1_1s5la"]
 [ext_resource type="Script" path="res://player/leg/leg.gd" id="1_csvmw"]
 [ext_resource type="Script" path="res://player/leg/target.gd" id="1_t2cvn"]
-[ext_resource type="Script" path="res://scripts/ik.gd" id="4_qr7fd"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_vw20s"]
 radius = 0.07
@@ -68,6 +67,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.25)
 
 [node name="OvershootRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.25)
-
-[node name="Node3d" type="Node3D" parent="."]
-script = ExtResource("4_qr7fd")

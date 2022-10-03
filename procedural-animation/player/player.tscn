@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2ya2rf21idl2"]
+[gd_scene load_steps=8 format=3 uid="uid://c2ya2rf21idl2"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1"]
 [ext_resource type="Script" path="res://player/camera.gd" id="2"]
 [ext_resource type="Script" path="res://player/camera_pivot.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://mseef47his28" path="res://player/leg/leg.tscn" id="4_f55ja"]
-[ext_resource type="Script" path="res://player/DebugRay.gd" id="5_7u64n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_su7qr"]
 size = Vector3(0.2, 0.2, 0.2)
@@ -14,10 +13,6 @@ albedo_color = Color(0.984314, 0.168627, 0.243137, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8pgsq"]
 size = Vector3(0.2, 0.2, 0.2)
-
-[sub_resource type="SphereMesh" id="SphereMesh_c6666"]
-radius = 0.05
-height = 0.1
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -65,10 +60,3 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 
 [node name="Leg4" parent="CollisionShape3D/Body/Legs" instance=ExtResource("4_f55ja")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -0.08, 0, 0)
-
-[node name="DebugRay" type="RayCast3D" parent="."]
-script = ExtResource("5_7u64n")
-
-[node name="MeshInstance3d" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("SphereMesh_c6666")

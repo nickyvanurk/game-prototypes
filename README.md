@@ -29,7 +29,8 @@ Flying vampire\
 Hot air balloon\
 Clouds\
 Debug tool\
-Inventory
+Inventory\
+Dialogue System
 
 ## Todo
 

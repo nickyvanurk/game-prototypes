@@ -1,58 +1,44 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://qttrul0grd0u"]
 
-[ext_resource path="res://player/player.gd" type="Script" id=1]
-[ext_resource path="res://player/camera.gd" type="Script" id=2]
-[ext_resource path="res://player/camera_pivot.gd" type="Script" id=3]
-[ext_resource path="res://grappling-hook/grappling_hook.tscn" type="PackedScene" id=4]
-[ext_resource path="res://player/crosshair.png" type="Texture" id=5]
+[ext_resource type="Script" path="res://player/player.gd" id="1"]
+[ext_resource type="Script" path="res://player/camera.gd" id="2"]
+[ext_resource type="Script" path="res://player/camera_pivot.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://ece4fijbavnf" path="res://grappling-hook/grappling_hook.tscn" id="4"]
 
-[sub_resource type="CapsuleMesh" id=1]
+[sub_resource type="CapsuleMesh" id="1"]
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="CapsuleShape3D" id="2"]
 
-[node name="Player" type="KinematicBody"]
+[node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-script = ExtResource( 1 )
+script = ExtResource("1")
 
-[node name="CameraPivot" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-script = ExtResource( 3 )
+[node name="CameraPivot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("3")
 min_pitch = -80.0
 max_pitch = 80.0
 
-[node name="CameraBoom" type="SpringArm" parent="CameraPivot"]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0 )
+[node name="CameraBoom" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 spring_length = 6.0
 
-[node name="CameraMount" type="Position3D" parent="CameraPivot/CameraBoom"]
+[node name="CameraMount" type="Marker3D" parent="CameraPivot/CameraBoom"]
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0.75, 0 )
-mesh = SubResource( 1 )
-material/0 = null
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+mesh = SubResource("1")
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0.75, 0 )
-shape = SubResource( 2 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+shape = SubResource("2")
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2.95587, 3.87947 )
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2.95587, 3.87947)
 current = true
 far = 1000.0
-script = ExtResource( 2 )
+script = ExtResource("2")
 
-[node name="TextureRect" type="TextureRect" parent="Camera"]
-margin_left = 497.0
-margin_top = 285.0
-margin_right = 1009.0
-margin_bottom = 797.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 0.059, 0.059 )
-texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="GrapplingHook" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0 )
+[node name="GrapplingHook" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+reel_speed = 2

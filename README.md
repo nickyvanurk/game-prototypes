@@ -35,5 +35,6 @@ Inventory
 
 - [ ] Upgrade projects to Godot 4
   - [x] Basic Scene
+  - [x] Grappling Hook
   - [x] Procedural Animation
 - [ ] Create video tutorials for each project

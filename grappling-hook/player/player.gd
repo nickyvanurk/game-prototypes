@@ -1,4 +1,4 @@
-extends KinematicBody
+extends CharacterBody3D
 
 var speed = 5
 var acceleration = 9
@@ -6,19 +6,18 @@ var air_acceleration = 2
 var jump_impulse = 6.2
 
 var direction = Vector3.ZERO
-var velocity = Vector3.ZERO
 
-onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
-onready var terminal_velocity = ProjectSettings.get("physics/3d/terminal_velocity")
+@onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
+@onready var terminal_velocity = ProjectSettings.get("physics/3d/terminal_velocity")
 
-onready var camera = $Camera
-onready var grappling_hook = $GrapplingHook
+@onready var camera = $Camera3D
+@onready var grappling_hook = $GrapplingHook
 
 var ray_length = 100
 var last_space_state
 
 func _ready():
-	last_space_state = get_world().direct_space_state
+	last_space_state = get_world_3d().direct_space_state
 
 func _input(event):
 	if event.is_action_pressed("grapple"):
@@ -41,9 +40,13 @@ func _physics_process(delta):
 		velocity.y += jump_impulse
 	
 	velocity.y = clamp(velocity.y - (gravity * delta), -terminal_velocity, terminal_velocity)
-	velocity = move_and_slide(velocity, Vector3.UP, true)
+	set_velocity(velocity)
+	set_up_direction(Vector3.UP)
+	set_floor_stop_on_slope_enabled(true)
+	move_and_slide()
+	velocity = velocity
 	
-	last_space_state = get_world().direct_space_state
+	last_space_state = get_world_3d().direct_space_state
 
 func get_input_direction():
 	direction = transform.basis.x * Input.get_axis("move_left", "move_right")
@@ -54,5 +57,5 @@ func raycast(space_state):
 	var center = get_viewport().size / 2
 	var from = camera.project_ray_origin(center)
 	var to = from + camera.project_ray_normal(center) * ray_length
-	var result = space_state.intersect_ray(from, to, [self])
+	var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(from, to, 4294967295, [self]))
 	return result.position if result else false

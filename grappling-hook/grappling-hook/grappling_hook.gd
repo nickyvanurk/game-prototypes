@@ -1,8 +1,8 @@
-extends Spatial
+extends Node3D
 
-export var min_rope_length = 1
-export var max_rope_length = 50
-export var reel_speed = 5
+@export var min_rope_length = 1
+@export var max_rope_length = 50
+@export var reel_speed = 5
 
 enum State { Released, Attached, ReelingIn, ReelingOut }
 
@@ -10,9 +10,8 @@ var state = State.Released
 var grapple_position = Vector3.ZERO
 var rope_length = min_rope_length
 
-onready var parent = get_parent()
-onready var line_geometry = get_node("LineGeometry")
-onready var rope = $Rope
+@onready var parent = get_parent()
+@onready var rope = $Rope
 
 func _ready():
 	if !("velocity" in parent):
@@ -32,27 +31,27 @@ func _physics_process(delta):
 			state = State.ReelingOut
 			if rope_length < max_rope_length:
 				rope_length += reel_speed * delta
-				var direction = (grapple_position - parent.translation).normalized()
-				parent.translation = grapple_position - direction * rope_length
+				var direction = (grapple_position - parent.position).normalized()
+				parent.position = grapple_position - direction * rope_length
 			
-		var direction = (grapple_position - parent.translation).normalized()
-		var length = (grapple_position - parent.translation).length()
+		var direction = (grapple_position - parent.position).normalized()
+		var length = (grapple_position - parent.position).length()
 		
 		if length > rope_length:
-			parent.translation = grapple_position - direction * rope_length
+			parent.position = grapple_position - direction * rope_length
 		
 			var speed_towards_grapple_position = round(parent.velocity.dot(direction) * 100) / 100
 			if speed_towards_grapple_position < 0:
 				parent.velocity -= speed_towards_grapple_position * direction
 		
-		rope.scale = Vector3(0.02, 0.02, length / 2)
+		rope.scale = Vector3(0.02, 0.02, length)
 		rope.look_at_from_position((grapple_position + global_transform.origin) / 2, grapple_position, Vector3.UP)
 		rope.visible = true
 
 func grapple(target):
 	state = State.Attached
 	grapple_position = target
-	rope_length = (grapple_position - parent.translation).length()
+	rope_length = (grapple_position - parent.position).length()
 	
 func release():
 	state = State.Released

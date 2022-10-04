@@ -1,24 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://ece4fijbavnf"]
 
-[ext_resource path="res://grappling-hook/grappling_hook.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://grappling-hook/grappling_hook.gd" id="1"]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="CylinderMesh" id="3"]
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[node name="GrapplingHook" type="Node3D"]
+script = ExtResource("1")
 
-[sub_resource type="CylinderMesh" id=3]
-
-[sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.72549, 0.72549, 0.72549, 1 )
-
-[node name="GrapplingHook" type="Spatial"]
-script = ExtResource( 1 )
-
-[node name="LineGeometry" type="ImmediateGeometry" parent="."]
-material_override = SubResource( 2 )
-
-[node name="Rope" type="MeshInstance" parent="."]
-transform = Transform( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+[node name="Rope" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+mesh = SubResource("3")

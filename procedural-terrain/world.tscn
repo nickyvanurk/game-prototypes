@@ -1,31 +1,50 @@
-[gd_scene load_steps=8 format=3 uid="uid://cpqqoy5xj0ttq"]
+[gd_scene load_steps=13 format=3 uid="uid://cpqqoy5xj0ttq"]
 
 [ext_resource type="Shader" path="res://terrain.gdshader" id="1_nrjao"]
+[ext_resource type="Shader" path="res://water.gdshader" id="2_628mr"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hvm2d"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rahbt"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wvxhj"]
-noise = SubResource("FastNoiseLite_hvm2d")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8oec0"]
+noise = SubResource("FastNoiseLite_rahbt")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_7pi0m"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1uph8"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ckdwt"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n71mm"]
 as_normal_map = true
-noise = SubResource("FastNoiseLite_7pi0m")
+noise = SubResource("FastNoiseLite_1uph8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oyogu"]
 render_priority = 0
 shader = ExtResource("1_nrjao")
 shader_parameter/height_scale = null
-shader_parameter/noise = SubResource("NoiseTexture2D_wvxhj")
-shader_parameter/normalmap = SubResource("NoiseTexture2D_ckdwt")
+shader_parameter/noise = SubResource("NoiseTexture2D_8oec0")
+shader_parameter/normalmap = SubResource("NoiseTexture2D_n71mm")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_81nn8"]
 material = SubResource("ShaderMaterial_oyogu")
 subdivide_width = 32
 subdivide_depth = 32
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hvm2d"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wvxhj"]
+noise = SubResource("FastNoiseLite_hvm2d")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_owyhc"]
+render_priority = 0
+shader = ExtResource("2_628mr")
+shader_parameter/noise = SubResource("NoiseTexture2D_wvxhj")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nvrt5"]
+material = SubResource("ShaderMaterial_owyhc")
+subdivide_width = 128
+subdivide_depth = 128
+
 [node name="World" type="Node3D"]
 
 [node name="Terrain" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_81nn8")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_nvrt5")

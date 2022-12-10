@@ -14,10 +14,10 @@ Game prototypes made in the Godot engine.
 
 ## Future Ideas
 
+Procedural Terrain
 Skybox\
 Day/night cycle\
-Procedural biome generation\
-Infinite terrain\
+Biome generation\
 Jetpack\
 Swimming\
 Gliding\

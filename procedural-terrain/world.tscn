@@ -1,3 +1,31 @@
-[gd_scene format=3 uid="uid://cpqqoy5xj0ttq"]
+[gd_scene load_steps=8 format=3 uid="uid://cpqqoy5xj0ttq"]
+
+[ext_resource type="Shader" path="res://terrain.gdshader" id="1_nrjao"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hvm2d"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wvxhj"]
+noise = SubResource("FastNoiseLite_hvm2d")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7pi0m"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ckdwt"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_7pi0m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oyogu"]
+render_priority = 0
+shader = ExtResource("1_nrjao")
+shader_parameter/height_scale = null
+shader_parameter/noise = SubResource("NoiseTexture2D_wvxhj")
+shader_parameter/normalmap = SubResource("NoiseTexture2D_ckdwt")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_81nn8"]
+material = SubResource("ShaderMaterial_oyogu")
+subdivide_width = 32
+subdivide_depth = 32
 
 [node name="World" type="Node3D"]
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_81nn8")

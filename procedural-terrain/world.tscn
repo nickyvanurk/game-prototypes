@@ -6,25 +6,32 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_rahbt"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8oec0"]
+width = 2048
+height = 2048
+seamless = true
 noise = SubResource("FastNoiseLite_rahbt")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1uph8"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n71mm"]
+width = 2048
+height = 2048
+seamless = true
 as_normal_map = true
 noise = SubResource("FastNoiseLite_1uph8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oyogu"]
 render_priority = 0
 shader = ExtResource("1_nrjao")
-shader_parameter/height_scale = null
+shader_parameter/height_scale = 120.0
 shader_parameter/noise = SubResource("NoiseTexture2D_8oec0")
 shader_parameter/normalmap = SubResource("NoiseTexture2D_n71mm")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_81nn8"]
 material = SubResource("ShaderMaterial_oyogu")
-subdivide_width = 32
-subdivide_depth = 32
+size = Vector2(2048, 2048)
+subdivide_width = 512
+subdivide_depth = 512
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hvm2d"]
 
@@ -38,6 +45,7 @@ shader_parameter/noise = SubResource("NoiseTexture2D_wvxhj")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nvrt5"]
 material = SubResource("ShaderMaterial_owyhc")
+size = Vector2(2048, 2048)
 subdivide_width = 128
 subdivide_depth = 128
 

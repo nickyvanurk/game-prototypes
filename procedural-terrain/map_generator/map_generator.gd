@@ -2,7 +2,7 @@
 extends Control
 
 @export var generate = false
-@export var seed: int = 0
+@export var seed: int = 0: set = _set_seed
 @export var falloff = true
 
 @export var width: int = 512: set = _set_width
@@ -58,6 +58,11 @@ func _generate_falloff_image(width: int, height: int) -> Image:
 			
 			image.set_pixel(j, i, Color(Color.BLACK.lerp(Color.WHITE, value)))
 	return image
+
+
+func _set_seed(value):
+	seed = value
+	_generate(width, height, seed)
 
 
 func _set_width(value):

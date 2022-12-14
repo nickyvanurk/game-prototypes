@@ -14,6 +14,7 @@ extends Control
 @export var lacunarity: float = 2.0: set = _set_lacunarity
 
 @onready var texture_rect = $TextureRect
+@onready var terrain = $Terrain
 
 var falloff_map: Image = null
 
@@ -40,7 +41,9 @@ func _generate(width: int, height: int, seed: int):
 
 		_subtract_pixels(height_map, falloff_map)
 	
-	texture_rect.texture = ImageTexture.create_from_image(height_map)
+	var texture = ImageTexture.create_from_image(height_map)
+	texture_rect.texture = texture
+	RenderingServer.global_shader_parameter_set("height_map", texture);	
 
 
 func _subtract_pixels(a: Image, b: Image):
@@ -59,6 +62,11 @@ func _generate_height_map_image(width: int, height: int, seed: int) -> Image:
 	n.fractal_octaves = octaves
 	n.fractal_gain = persistence
 	n.fractal_lacunarity = lacunarity
+	
+	# return array; not image?
+	
+	# Can I have in editor texture preview?
+	
 	return n.get_image(width, height)
 
 

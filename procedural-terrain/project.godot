@@ -14,3 +14,10 @@ config/name="Procedural Terrain"
 run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
+
+[shader_globals]
+
+height_map={
+"type": "sampler2D",
+"value": ""
+}

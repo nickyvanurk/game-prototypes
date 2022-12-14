@@ -25,6 +25,8 @@ func _process(delta):
 
 
 func _generate(width: int, height: int, seed: int):
+	if not Engine.is_editor_hint(): return
+	
 	var height_map = _generate_height_map_image(width, height, seed)
 	
 	if falloff:
@@ -32,7 +34,7 @@ func _generate(width: int, height: int, seed: int):
 			falloff_map = _generate_falloff_image(width, height)
 
 		_subtract_pixels(height_map, falloff_map)
-
+	
 	texture_rect.texture = ImageTexture.create_from_image(height_map)
 
 

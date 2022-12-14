@@ -31,11 +31,17 @@ func _generate(width: int, height: int, seed: int):
 		if not falloff_map or falloff_map.get_width() != width or falloff_map.get_height() != height:
 			falloff_map = _generate_falloff_image(width, height)
 
-		for y in height:
-			for x in width:
-				height_map.set_pixel(x, y, height_map.get_pixel(x, y) - falloff_map.get_pixel(x, y))
+		_subtract_pixels(height_map, falloff_map)
 
 	texture_rect.texture = ImageTexture.create_from_image(height_map)
+
+
+func _subtract_pixels(a: Image, b: Image):
+	assert(a.get_width() == b.get_width() and a.get_height() == b.get_height())
+
+	for y in a.get_height():
+		for x in a.get_width():
+			a.set_pixel(x, y, a.get_pixel(x, y) - b.get_pixel(x, y))
 
 
 func _generate_height_map_image(width: int, height: int, seed: int) -> Image:

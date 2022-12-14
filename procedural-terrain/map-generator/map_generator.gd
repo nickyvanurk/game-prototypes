@@ -3,7 +3,7 @@ extends Control
 
 @export var generate = false
 @export var seed: int = 0: set = _set_seed
-@export var falloff = true
+@export var falloff = true: set = _set_falloff
 
 @export var width: int = 512: set = _set_width
 @export var height: int = 512: set = _set_height
@@ -80,6 +80,11 @@ func _generate_falloff_image(width: int, height: int) -> Image:
 
 func _set_seed(value: int):
 	seed = value
+	_generate(width, height, seed)
+
+
+func _set_falloff(value: bool):
+	falloff = value
 	_generate(width, height, seed)
 
 

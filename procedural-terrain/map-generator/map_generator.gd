@@ -8,6 +8,11 @@ extends Control
 @export var width: int = 512: set = _set_width
 @export var height: int = 512: set = _set_height
 
+@export var octaves: int = 6: set = _set_octaves
+@export var frequency: float = 1.25: set = _set_frequency
+@export var persistence: float = 0.5: set = _set_persistence
+@export var lacunarity: float = 2.0: set = _set_lacunarity
+
 @onready var texture_rect = $TextureRect
 
 var falloff_map: Image = null
@@ -48,7 +53,12 @@ func _subtract_pixels(a: Image, b: Image):
 
 func _generate_height_map_image(width: int, height: int, seed: int) -> Image:
 	var n = FastNoiseLite.new()
+	n.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	n.seed = seed
+	n.frequency = frequency
+	n.fractal_octaves = octaves
+	n.fractal_gain = persistence
+	n.fractal_lacunarity = lacunarity
 	return n.get_image(width, height)
 
 
@@ -68,16 +78,36 @@ func _generate_falloff_image(width: int, height: int) -> Image:
 	return image
 
 
-func _set_seed(value):
+func _set_seed(value: int):
 	seed = value
 	_generate(width, height, seed)
 
 
-func _set_width(value):
+func _set_width(value: int):
 	width = value
 	_generate(width, height, seed)
 
 
-func _set_height(value):
+func _set_height(value: int):
 	height = value
+	_generate(width, height, seed)
+
+
+func _set_octaves(value: int):
+	octaves = value
+	_generate(width, height, seed)
+
+
+func _set_frequency(value: float):
+	frequency = value
+	_generate(width, height, seed)
+
+
+func _set_persistence(value: float):
+	persistence = value
+	_generate(width, height, seed)
+
+
+func _set_lacunarity(value: float):
+	lacunarity = value
 	_generate(width, height, seed)

@@ -19,5 +19,9 @@ config/icon="res://icon.svg"
 
 height_map={
 "type": "sampler2D",
-"value": ""
+"value": "res://map-generator/height_map.tres"
+}
+height_map_size={
+"type": "vec2",
+"value": Vector2(512, 512)
 }

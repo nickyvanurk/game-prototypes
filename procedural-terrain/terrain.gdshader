@@ -1,6 +1,6 @@
 shader_type spatial;
 
-uniform float height_scale = 80;
+uniform float height_scale = 200;
 uniform float uvx = 0.0;
 uniform float uvy = 0.0;
 
@@ -30,11 +30,11 @@ void vertex() {
 }
 
 void fragment() {
-	if (height < 41.0) {
+	if (height < 40.5) {
 		ALBEDO = vec3(238.0/255.0, 222.0/255.0, 61.0/255.0);
-	} else if (height < 50.0) {
+	} else if (height < 100.0) {
 		ALBEDO = vec3(79.0/255.0, 187.0/255.0, 40.0/255.0);
-	} else if (height < 70.0) {
+	} else if (height < 180.0) {
 		ALBEDO = vec3(79.0/255.0, 187.0/255.0, 80.0/255.0);
 	} else {
 		ALBEDO = vec3(1, 1, 1);

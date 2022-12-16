@@ -1,5 +1,5 @@
 @tool
-extends Control
+extends Node3D
 
 @export var generate = false
 @export var seed: int = 0: set = _set_seed
@@ -9,11 +9,10 @@ extends Control
 @export var height: int = 512: set = _set_height
 
 @export var octaves: int = 6: set = _set_octaves
-@export var frequency: float = 1.25: set = _set_frequency
+@export var frequency: float = 0.002: set = _set_frequency
 @export var persistence: float = 0.5: set = _set_persistence
 @export var lacunarity: float = 2.0: set = _set_lacunarity
 
-@onready var texture_rect = $TextureRect
 @onready var terrain = $Terrain
 
 var falloff_map: Image = null
@@ -42,7 +41,6 @@ func _generate(width: int, height: int, seed: int):
 		_subtract_pixels(height_map, falloff_map)
 	
 	var texture = ImageTexture.create_from_image(height_map)
-	texture_rect.texture = texture
 	RenderingServer.global_shader_parameter_set("height_map", texture);	
 
 

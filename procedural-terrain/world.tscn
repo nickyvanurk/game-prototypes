@@ -22,6 +22,8 @@ image = SubResource("Image_ym54l")
 render_priority = 0
 shader = ExtResource("1_nrjao")
 shader_parameter/height_scale = 80.0
+shader_parameter/uvx = 0.0
+shader_parameter/uvy = 0.0195312
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_81nn8"]
 material = SubResource("ShaderMaterial_oyogu")
@@ -77,6 +79,6 @@ light_energy = 16.0
 omni_range = 504.102
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 64.5021, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="Timer" type="Timer" parent="."]

@@ -3,7 +3,7 @@ shader_type spatial;
 uniform float height_scale = 80;
 
 global uniform sampler2D height_map;
-global uniform vec2 height_map_size;
+const vec2 height_map_size = vec2(512, 512);
 
 varying float height;
 

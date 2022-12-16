@@ -62,11 +62,6 @@ func _generate_height_map_image(width: int, height: int, seed: int) -> Image:
 	n.fractal_octaves = octaves
 	n.fractal_gain = persistence
 	n.fractal_lacunarity = lacunarity
-	
-	# return array; not image?
-	
-	# Can I have in editor texture preview?
-	
 	return n.get_image(width, height)
 
 
@@ -98,7 +93,6 @@ func _set_falloff(value: bool):
 
 func _set_width(value: int):
 	width = value
-	terrain.mesh.size.x = width
 	RenderingServer.global_shader_parameter_set("height_map_size", Vector2(width, height));
 	
 	_generate(width, height, seed)
@@ -106,7 +100,6 @@ func _set_width(value: int):
 
 func _set_height(value: int):
 	height = value
-	terrain.mesh.size.x = height
 	RenderingServer.global_shader_parameter_set("height_map_size", Vector2(width, height));	
 	_generate(width, height, seed)
 

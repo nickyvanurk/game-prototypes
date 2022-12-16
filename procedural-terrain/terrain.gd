@@ -10,4 +10,5 @@ func _snap(player):
 	global_transform.origin.x = player_pos.x
 	global_transform.origin.z = player_pos.z
 	get_active_material(0).set("shader_param/uvx", player_pos.x / size)
-	get_active_material(0).set("shader_param/uvy", player_pos.y / size)
+	get_active_material(0).set("shader_param/uvy", player_pos.z / size)
+	print(player_pos.x / size)

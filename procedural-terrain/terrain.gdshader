@@ -5,15 +5,20 @@ uniform float uvx = 0.0;
 uniform float uvy = 0.0;
 
 global uniform sampler2D height_map;
-const vec2 height_map_size = vec2(512, 512);
+const float height_map_size = 2048.0;
+const float mesh_size = 512.0;
+const float scale = 1.0 / (height_map_size / mesh_size);
 
 varying float height;
 
 void vertex() {
-	UV.x += uvx;
-	UV.y += uvy;
+	UV *= scale;
+	UV += 0.5 - scale / 2.0;
+
+	UV.x += uvx * scale;
+	UV.y += uvy * scale;
 	
-	vec2 texel_size = vec2(1.0 / height_map_size.x, 1.0 / height_map_size.y);
+	vec2 texel_size = vec2(1.0 / height_map_size, 1.0 / height_map_size);
 	height = texture(height_map, UV).r * height_scale;
 	VERTEX.y += height;
 	

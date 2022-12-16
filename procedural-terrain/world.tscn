@@ -10,7 +10,7 @@
 render_priority = 0
 shader = ExtResource("1_nrjao")
 shader_parameter/height_scale = 200.0
-shader_parameter/uvx = 0.128906
+shader_parameter/uvx = 0.132812
 shader_parameter/uvy = 0.169922
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_81nn8"]
@@ -44,7 +44,7 @@ frequency = 0.01
 persistence = 0.3
 
 [node name="Terrain" type="MeshInstance3D" parent="MapGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 0, 87)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68, 0, 87)
 mesh = SubResource("PlaneMesh_81nn8")
 skeleton = NodePath("../..")
 script = ExtResource("3_gnyvu")
@@ -59,6 +59,4 @@ light_energy = 16.0
 omni_range = 504.102
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999847, 0, -0.0174699, 0, 1, 0, 0.0174699, 0, 0.999847, 65.52, 41, 86.5156)
-
-[node name="Timer" type="Timer" parent="."]
+transform = Transform3D(0.999847, 0, -0.0174699, 0, 1, 0, 0.0174699, 0, 0.999847, 67.5904, 41, 86.5156)

@@ -4,10 +4,10 @@ uniform float height_scale = 200;
 uniform float uvx = 0.0;
 uniform float uvy = 0.0;
 
-global uniform sampler2D height_map;
-const float height_map_size = 2048.0;
+global uniform sampler2D heightmap;
+const float heightmap_size = 2048.0;
 const float mesh_size = 512.0;
-const float scale = 1.0 / (height_map_size / mesh_size);
+const float scale = 1.0 / (heightmap_size / mesh_size);
 
 varying float height;
 
@@ -18,14 +18,14 @@ void vertex() {
 	UV.x += uvx * scale;
 	UV.y += uvy * scale;
 	
-	vec2 texel_size = vec2(1.0 / height_map_size, 1.0 / height_map_size);
-	height = texture(height_map, UV).r * height_scale;
+	vec2 texel_size = vec2(1.0 / heightmap_size, 1.0 / heightmap_size);
+	height = texture(heightmap, UV).r * height_scale;
 	VERTEX.y += height;
 	
-	float l = texture(height_map, vec2(UV.x - texel_size.x, UV.y)).r;
-	float r = texture(height_map, vec2(UV.x + texel_size.x, UV.y)).r;
-	float t = texture(height_map, vec2(UV.x, UV.y - texel_size.y)).r;
-	float b = texture(height_map, vec2(UV.x, UV.y + texel_size.y)).r;
+	float l = texture(heightmap, vec2(UV.x - texel_size.x, UV.y)).r;
+	float r = texture(heightmap, vec2(UV.x + texel_size.x, UV.y)).r;
+	float t = texture(heightmap, vec2(UV.x, UV.y - texel_size.y)).r;
+	float b = texture(heightmap, vec2(UV.x, UV.y + texel_size.y)).r;
 	NORMAL = normalize(vec3((l - r)/(2.0*texel_size.x), (t - b)/(2.0*texel_size.y), 1));
 }
 

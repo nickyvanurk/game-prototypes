@@ -40,7 +40,7 @@ script = ExtResource("1_a2jnr")
 
 [node name="MapGenerator" type="Node3D" parent="."]
 script = ExtResource("1_v43c5")
-seed = 1500180840
+seed = 490326067
 frequency = 0.01
 persistence = 0.3
 

@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [shader_globals]
 
-height_map={
+heightmap={
 "type": "sampler2D",
-"value": "res://map-generator/height_map.tres"
+"value": "res://map-generator/heightmap.tres"
 }

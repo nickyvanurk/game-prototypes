@@ -41,8 +41,8 @@ func _generate(width: int, height: int, seed: int):
 		_subtract_pixels(height_map, falloff_map)
 
 	var texture = ImageTexture.create_from_image(height_map)
-	RenderingServer.global_shader_parameter_set("height_map", texture);
-	ResourceSaver.save(texture, "res://map-generator/height_map.tres");
+	RenderingServer.global_shader_parameter_set("heightmap", texture);
+	ResourceSaver.save(texture, "res://map-generator/heightmap.tres");
 
 
 func _subtract_pixels(a: Image, b: Image):

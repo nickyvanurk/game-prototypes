@@ -39,9 +39,10 @@ func _generate(width: int, height: int, seed: int):
 			falloff_map = _generate_falloff_image(width, height)
 
 		_subtract_pixels(height_map, falloff_map)
-	
+
 	var texture = ImageTexture.create_from_image(height_map)
-	RenderingServer.global_shader_parameter_set("height_map", texture);	
+	RenderingServer.global_shader_parameter_set("height_map", texture);
+	ResourceSaver.save(texture, "res://map-generator/height_map.tres");
 
 
 func _subtract_pixels(a: Image, b: Image):
@@ -92,7 +93,6 @@ func _set_falloff(value: bool):
 func _set_width(value: int):
 	width = value
 	RenderingServer.global_shader_parameter_set("height_map_size", Vector2(width, height));
-	
 	_generate(width, height, seed)
 
 

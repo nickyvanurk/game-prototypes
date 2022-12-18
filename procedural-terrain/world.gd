@@ -1,7 +1,7 @@
 @tool
 extends Node3D
 
-@onready var player = $Camera3D
+@onready var player = $Player
 @onready var terrain = $MapGenerator/Terrain
 
 

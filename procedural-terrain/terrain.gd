@@ -1,7 +1,7 @@
 @tool
 extends MeshInstance3D
 
-var snap_step = 1.0
+var snap_step = 16
 var shape = HeightMapShape3D.new()
 var collision_decimation = 2.0
 

@@ -18,15 +18,15 @@ void vertex() {
 	UV.x += uvx * scale;
 	UV.y += uvy * scale;
 	
-	vec2 texel_size = vec2(1.0 / heightmap_size, 1.0 / heightmap_size);
 	height = texture(heightmap, UV).r * height_scale;
 	VERTEX.y += height;
 	
-	float l = texture(heightmap, vec2(UV.x - texel_size.x, UV.y)).r;
-	float r = texture(heightmap, vec2(UV.x + texel_size.x, UV.y)).r;
-	float t = texture(heightmap, vec2(UV.x, UV.y - texel_size.y)).r;
-	float b = texture(heightmap, vec2(UV.x, UV.y + texel_size.y)).r;
-	NORMAL = normalize(vec3((l - r)/(2.0*texel_size.x), (t - b)/(2.0*texel_size.y), 1));
+	vec2 texel_size = vec2(1.0 / (heightmap_size * scale), 1.0 / (heightmap_size * scale));
+	float l = texture(heightmap, UV + vec2(-texel_size.x, 0)).r;
+	float r = texture(heightmap, UV + vec2(texel_size.x, 0)).r;
+	float t = texture(heightmap, UV + vec2(0, -texel_size.y)).r;
+	float b = texture(heightmap, UV + vec2(0, texel_size.y)).r;
+	NORMAL = normalize(vec3((l - r), 2.0*texel_size.x, (t - b)));
 }
 
 void fragment() {

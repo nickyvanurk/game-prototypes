@@ -18,7 +18,12 @@ void vertex() {
 	UV.x += uvx * scale;
 	UV.y += uvy * scale;
 	
-	height = texture(heightmap, UV).r * height_scale;
+	vec2 v = VERTEX.xz;
+	v = (v / 2048.0 / 4.0 + 0.5);
+	v.x += uvx / 4.0 / 4.0;
+	v.y += uvy / 4.0 / 4.0;
+	
+	height = texture(heightmap, v).r * height_scale;
 	VERTEX.y += height;
 	
 	vec2 texel_size = vec2(1.0 / (heightmap_size * scale), 1.0 / (heightmap_size * scale));

@@ -2,6 +2,7 @@ shader_type spatial;
 render_mode specular_toon;
 
 uniform sampler2D noise;
+uniform vec4 color: source_color;
 
 float wave(vec2 position) {
 	position += texture(noise, position).x;
@@ -26,9 +27,11 @@ void vertex() {
 }
 
 void fragment() {
+	vec4 alpha = texture(SCREEN_TEXTURE, SCREEN_UV);
+	
 	float fresnel = sqrt(1.0 - dot(NORMAL, VIEW));
 	RIM = 0.2;
 	METALLIC = 0.0;
   	ROUGHNESS = 0.01 * (1.0 - fresnel);
-	ALBEDO = vec3(0.1, 0.3, 0.5) + (0.1 * fresnel);
+	ALBEDO = mix(alpha.rgb, color.rgb, color.a) + (0.1 * fresnel);
 }

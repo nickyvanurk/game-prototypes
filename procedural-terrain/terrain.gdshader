@@ -1,37 +1,37 @@
 shader_type spatial;
+render_mode diffuse_toon, specular_toon;
 
 uniform float height_scale = 200;
 uniform float uvx = 0.0;
 uniform float uvy = 0.0;
 
 global uniform sampler2D heightmap;
-const float heightmap_size = 2048.0;
-const float mesh_size = 512.0;
-const float scale = 1.0 / (heightmap_size / mesh_size);
 
 varying float height;
 
-void vertex() {
-	UV *= scale;
-	UV += 0.5 - scale / 2.0;
-
-	UV.x += uvx * scale;
-	UV.y += uvy * scale;
-	
+void vertex() {	
 	vec2 v = VERTEX.xz;
-	v = (v / 2048.0 / 4.0 + 0.5);
-	v.x += uvx / 4.0 / 4.0;
-	v.y += uvy / 4.0 / 4.0;
+	v = (v / 2048.0 + 0.5);
+	v.x += uvx / 4.0;
+	v.y += uvy / 4.0;
 	
 	height = texture(heightmap, v).r * height_scale;
 	VERTEX.y += height;
 	
-	vec2 texel_size = vec2(1.0 / (heightmap_size * scale), 1.0 / (heightmap_size * scale));
-	float l = texture(heightmap, UV + vec2(-texel_size.x, 0)).r;
-	float r = texture(heightmap, UV + vec2(texel_size.x, 0)).r;
-	float t = texture(heightmap, UV + vec2(0, -texel_size.y)).r;
-	float b = texture(heightmap, UV + vec2(0, texel_size.y)).r;
-	NORMAL = normalize(vec3((l - r), 2.0*texel_size.x, (t - b)));
+	vec2 texel_size = vec2(1.0 / 512.0, 1.0 / 512.0);
+	float l = texture(heightmap, v + vec2(-texel_size.x, 0)).r;
+	float r = texture(heightmap, v + vec2(texel_size.x, 0)).r;
+	float t = texture(heightmap, v + vec2(0, -texel_size.y)).r;
+	float b = texture(heightmap, v + vec2(0, texel_size.y)).r;
+	
+	float h_n = texture(heightmap, v).r;
+	vec3 va = vec3(0, (t - h_n) * height_scale, -1);
+	vec3 vb = vec3(1, (r - h_n) * height_scale, 0);
+	vec3 vc = vec3(0, (b - h_n) * height_scale, 1);
+	vec3 vd = vec3(-1, (l - h_n) * height_scale, 0);
+	
+	vec3 average_n = (cross(vb, va) + cross(vc, vb) + cross(vd, vc) + cross(va, vd)) / 4.0;
+	NORMAL = normalize(average_n);
 }
 
 void fragment() {

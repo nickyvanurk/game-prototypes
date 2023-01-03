@@ -57,5 +57,5 @@ func raycast(space_state):
 	var center = get_viewport().size / 2
 	var from = camera.project_ray_origin(center)
 	var to = from + camera.project_ray_normal(center) * ray_length
-	var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(from, to, 4294967295, [self]))
+	var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(from, to, 4294967295, [self.get_rid()]))
 	return result.position if result else false

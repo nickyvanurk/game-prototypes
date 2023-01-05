@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlkhs7g533o6n"]
+
+[ext_resource type="PackedScene" uid="uid://bxr8gr6f4muum" path="res://player.tscn" id="1_b4kn6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5mfh8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ixus2"]
+size = Vector3(200, 1, 200)
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_5mfh8")
+mesh = SubResource("BoxMesh_ixus2")
+skeleton = NodePath("")
+
+[node name="Player" parent="." instance=ExtResource("1_b4kn6")]
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.519519, 0.854459, 0, -0.854459, 0.519519, 0, 3, 1.5)

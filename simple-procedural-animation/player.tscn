@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxr8gr6f4muum"]
+[gd_scene load_steps=5 format=3 uid="uid://bxr8gr6f4muum"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_tngw5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_aqfur"]
 radius = 0.25
@@ -10,6 +12,7 @@ albedo_color = Color(1, 0.0470588, 0.054902, 1)
 size = Vector3(0.25, 0.25, 0.25)
 
 [node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_tngw5")
 
 [node name="Shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.252263, 0)

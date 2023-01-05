@@ -21,8 +21,6 @@ func _physics_process(delta):
 	velocity.z = velocity.z + (direction.z * speed - velocity.z) * (acceleration * delta)
 	global_position += velocity * transform.basis.inverse() * delta
 	
-	rotate_object_local(Vector3.UP, deg_to_rad(-Input.get_axis("turn_left", "turn_right") * rotation_speed * delta))
-	
 	var dir = (velocity * transform.basis.inverse()).normalized()
 	if !legs[0].is_moving && !legs[2].is_moving:
 		legs[1].step(dir, delta)

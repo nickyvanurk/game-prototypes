@@ -15,6 +15,27 @@ var center_point = Vector3()
 var end_point = Vector3()
 
 
+func _process(delta):
+#	var p = solve(Vector2(target.position.y, target.position.z), $Bone1.length, $Bone2.length)
+#	$DebugBall.position.y = p.x
+#	$DebugBall.position.z = p.y
+
+#	$Bone1.rotation.y= Vector3($Bone1.global_position).look_at(target)
+
+	var d = $Bone1.global_position - target.global_position
+	$Bone1.global_rotation.y = lerp_angle($Bone1.global_rotation.y, atan2(d.x, d.z), 1)
+	
+	
+	
+
+
+func solve(p: Vector2, r1: float, r2: float) -> Vector2:
+	var h = p.dot(p)
+	var w = h + r1*r1 - r2*r2
+	var s = max(4.0*r1*r1*h - w*w,0.0)
+	return (w*p + Vector2(-p.y,p.x)*sqrt(s)) * 0.5/h
+
+
 func step(direction, delta):
 	if !home_ray.is_colliding():
 		return

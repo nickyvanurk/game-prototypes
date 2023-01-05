@@ -8,6 +8,16 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "Node",
+"class": &"IK",
+"language": &"GDScript",
+"path": "res://ik.gd"
+}]
+_global_script_class_icons={
+"IK": ""
+}
+
 [application]
 
 config/name="Simple Procedural Animation"

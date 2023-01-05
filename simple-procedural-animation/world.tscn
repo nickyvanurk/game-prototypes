@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlkhs7g533o6n"]
+[gd_scene load_steps=6 format=3 uid="uid://dlkhs7g533o6n"]
 
 [ext_resource type="PackedScene" uid="uid://bxr8gr6f4muum" path="res://player.tscn" id="1_b4kn6"]
+[ext_resource type="Script" path="res://camera.gd" id="2_2ak63"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rwc6a"]
 size = Vector3(200, 1, 200)
@@ -28,5 +29,7 @@ skeleton = NodePath("")
 
 [node name="Player" parent="." instance=ExtResource("1_b4kn6")]
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 0.519519, 0.854459, 0, -0.854459, 0.519519, 0, 3, 1.5)
+script = ExtResource("2_2ak63")
+target = NodePath("../Player")

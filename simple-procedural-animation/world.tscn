@@ -31,7 +31,7 @@ skeleton = NodePath("")
 [node name="Player" parent="." instance=ExtResource("1_b4kn6")]
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 0.519519, 0.854459, 0, -0.854459, 0.519519, 0, 3, 1.5)
+transform = Transform3D(1, 0, 0, 0, 0.895681, 0.444698, 0, -0.444698, 0.895681, -0.480936, 1.89315, 1.84761)
 script = ExtResource("2_2ak63")
 target = NodePath("../Player")
 

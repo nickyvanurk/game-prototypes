@@ -16,17 +16,16 @@ var end_point = Vector3()
 
 
 func _process(delta):
-#	var p = solve(Vector2(target.position.y, target.position.z), $Bone1.length, $Bone2.length)
-#	$DebugBall.position.y = p.x
-#	$DebugBall.position.z = p.y
-
-#	$Bone1.rotation.y= Vector3($Bone1.global_position).look_at(target)
-
-	var d = $Bone1.global_position - target.global_position
-	$Bone1.global_rotation.y = lerp_angle($Bone1.global_rotation.y, atan2(d.x, d.z), 1)
+	$Socket.rotation.y = atan2(-target.global_position.z, target.global_position.x) - PI/2
 	
+	var d = $Socket.to_local(target.global_position)
+	var p = solve(Vector2(-d.z, d.y), $Bone1.length, $Bone1/Bone2.length)
 	
+	$Socket/Joint.position.z = -p.x
+	$Socket/Joint.position.y = p.y
 	
+	$Bone1.look_at($Socket/Joint.global_position)
+	$Bone1/Bone2.look_at(target.global_position)
 
 
 func solve(p: Vector2, r1: float, r2: float) -> Vector2:

@@ -43,13 +43,13 @@ skeleton = NodePath("../..")
 [node name="Legs" type="Node3D" parent="Shape/Body"]
 
 [node name="Leg1" parent="Shape/Body/Legs" instance=ExtResource("4_f55ja")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.09)
 
 [node name="Leg2" parent="Shape/Body/Legs" instance=ExtResource("4_f55ja")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.08, 0, 0)
+transform = Transform3D(-8.9407e-08, 0, 1, 0, 1, 0, -1, 0, -8.9407e-08, -0.09, 0, 0)
 
 [node name="Leg3" parent="Shape/Body/Legs" instance=ExtResource("4_f55ja")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.08)
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 0.09)
 
 [node name="Leg4" parent="Shape/Body/Legs" instance=ExtResource("4_f55ja")]
-transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -0.08, 0, 0)
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0.09, 0, 0)

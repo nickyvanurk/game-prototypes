@@ -1,9 +1,10 @@
 @tool
+class_name MapGenerator
 extends Node
 
 @export var generate = false
 @export var world_size = 2048
-@export var chunk_size: int = 512
+@export var chunk_size: int = 513
 @export var chunk_offset = Vector2()
 @export var seed: int = 0
 @export var octaves: int = 6
@@ -11,9 +12,9 @@ extends Node
 @export var persistence: float = 0.5
 @export var lacunarity: float = 2.0
 
-@export var deep_water = 0.2
-@export var shallow_water = 0.4
-@export var sand = 0.45
+@export var deep_water = 0.4
+@export var shallow_water = 0.5
+@export var sand = 0.55
 @export var grass = 0.6
 @export var forest = 0.7
 @export var rock = 0.75
@@ -27,23 +28,23 @@ extends Node
 @export var rock_color = Color(0.5, 0.5, 0.5, 1)
 @export var snow_color = Color(1, 1, 1, 1)
 
-@onready var preview = get_node("Preview")
+#@onready var preview = get_node("Preview")
 
 
-func _ready():
-	_generate()
-
-
-func _process(delta):
-	if generate:
-		_generate()
-		generate = false
+#func _ready():
+#	_generate()
+#
+#
+#func _process(delta):
+#	if generate:
+#		_generate()
+#		generate = false
 
 
 func _generate():
 	var height_map = _generate_height_map()
 	var colored_height_map = _generate_colored_height_map(height_map)
-	preview.texture = ImageTexture.create_from_image(colored_height_map)
+#	preview.texture = ImageTexture.create_from_image(colored_height_map)
 
 
 func _generate_colored_height_map(height_map) -> Image:

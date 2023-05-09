@@ -39,11 +39,18 @@ func _process(delta):
 
 
 func _generate():
-	preview.texture = ImageTexture.create_from_image(_generate_colored_height_map())
-
-
-func _generate_colored_height_map() -> Image:
 	var height_map = _generate_height_map()
+	var falloff_map = _generate_falloff_map()
+	
+	for y in size:
+		for x in size:
+			height_map.set_pixel(x, y, height_map.get_pixel(x, y) - falloff_map.get_pixel(x, y))
+	
+	var colored_height_map = _generate_colored_height_map(height_map)
+	preview.texture = ImageTexture.create_from_image(colored_height_map)
+
+
+func _generate_colored_height_map(height_map) -> Image:
 	var colored_height_map = Image.create(size, size, false, Image.FORMAT_RGBA8)
 	for y in range(size):
 		for x in range(size):
@@ -75,6 +82,20 @@ func _generate_height_map() -> Image:
 	n.fractal_gain = persistence
 	n.fractal_lacunarity = lacunarity
 	return n.get_image(size, size)
+
+
+func _generate_falloff_map() -> Image:
+	var falloff_map = Image.create(size, size, false, Image.FORMAT_RGBA8)	
+	for y in size:
+		for x in size:
+			var value = maxf(absf(float(x) / float(size) * 2 - 1), 
+							absf(float(y) / float(size) * 2 - 1))
+			var a = 3.0
+			var b = 2.2
+			value = pow(value, a) / (pow(value, a) + pow(b - b * value, a))
+			falloff_map.set_pixel(x, y, Color(Color.BLACK.lerp(Color.WHITE, value)))
+	return falloff_map
+
 
 
 func _generate_texture() -> Image:

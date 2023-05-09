@@ -52,8 +52,8 @@ func _generate():
 
 func _generate_colored_height_map(height_map) -> Image:
 	var colored_height_map = Image.create(size, size, false, Image.FORMAT_RGBA8)
-	for y in range(size):
-		for x in range(size):
+	for y in size:
+		for x in size:
 			var value = height_map.get_pixel(x, y).r
 			
 			if value < deep_water:
@@ -81,7 +81,14 @@ func _generate_height_map() -> Image:
 	n.fractal_octaves = octaves
 	n.fractal_gain = persistence
 	n.fractal_lacunarity = lacunarity
-	return n.get_image(size, size, false, false, false)
+	
+	var half_size = size / 2
+	var height_map = Image.create(size, size, false, Image.FORMAT_RGBA8)
+	for y in size:
+		for x in size:
+			var value = n.get_noise_2d(x - half_size, y - half_size) * 0.5 + 0.5
+			height_map.set_pixel(x, y, Color(value, value, value, 1))
+	return height_map
 
 
 func _generate_falloff_map() -> Image:

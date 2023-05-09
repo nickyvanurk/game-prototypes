@@ -3,7 +3,8 @@ extends Node
 
 @export var generate = false
 @export var world_size = 2048
-@export var size: int = 512
+@export var chunk_size: int = 512
+@export var chunk_offset = Vector2()
 @export var seed: int = 0
 @export var octaves: int = 6
 @export var frequency: float = 0.002
@@ -46,9 +47,9 @@ func _generate():
 
 
 func _generate_colored_height_map(height_map) -> Image:
-	var colored_height_map = Image.create(size, size, false, Image.FORMAT_RGBA8)
-	for y in size:
-		for x in size:
+	var colored_height_map = Image.create(chunk_size, chunk_size, false, Image.FORMAT_RGBA8)
+	for y in chunk_size:
+		for x in chunk_size:
 			var value = height_map.get_pixel(x, y).r
 			
 			if value < deep_water:
@@ -77,13 +78,13 @@ func _generate_height_map() -> Image:
 	n.fractal_gain = persistence
 	n.fractal_lacunarity = lacunarity
 	
-	var half_size = size / 2
-	var height_map = Image.create(size, size, false, Image.FORMAT_RGBA8)
-	for y in size:
-		for x in size:
-			var value = n.get_noise_2d(x - half_size, y - half_size) * 0.5 + 0.5
+	var half_chunk_size = chunk_size / 2
+	var height_map = Image.create(chunk_size, chunk_size, false, Image.FORMAT_RGBA8)
+	for y in chunk_size:
+		for x in chunk_size:
+			var value = n.get_noise_2d(x - half_chunk_size + (chunk_size * chunk_offset.x), y - half_chunk_size + (chunk_size * chunk_offset.y)) * 0.5 + 0.5
 			
-			var falloff_value = maxf(absf(float(x) / float(world_size) * 2 - (float(size) / float(world_size))), absf(float(y) / float(world_size) * 2 - (float(size) / float(world_size))))
+			var falloff_value = maxf(absf(float(x + (chunk_size * chunk_offset.x)) / float(world_size) * 2 - (float(chunk_size) / float(world_size))), absf(float(y + (chunk_size * chunk_offset.y)) / float(world_size) * 2 - (float(chunk_size) / float(world_size))))
 			var a = 3.0 
 			var b = 2.2
 			falloff_value = pow(falloff_value, a) / (pow(falloff_value, a) + pow(b - b * falloff_value, a))

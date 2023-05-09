@@ -2,6 +2,7 @@
 extends Node
 
 @export var generate = false
+@export var world_size = 2048
 @export var size: int = 512
 @export var seed: int = 0
 @export var octaves: int = 6
@@ -40,12 +41,6 @@ func _process(delta):
 
 func _generate():
 	var height_map = _generate_height_map()
-	var falloff_map = _generate_falloff_map()
-	
-	for y in size:
-		for x in size:
-			height_map.set_pixel(x, y, height_map.get_pixel(x, y) - falloff_map.get_pixel(x, y))
-
 	var colored_height_map = _generate_colored_height_map(height_map)
 	preview.texture = ImageTexture.create_from_image(colored_height_map)
 
@@ -87,18 +82,12 @@ func _generate_height_map() -> Image:
 	for y in size:
 		for x in size:
 			var value = n.get_noise_2d(x - half_size, y - half_size) * 0.5 + 0.5
+			
+			var falloff_value = maxf(absf(float(x) / float(world_size) * 2 - (float(size) / float(world_size))), absf(float(y) / float(world_size) * 2 - (float(size) / float(world_size))))
+			var a = 3.0 
+			var b = 2.2
+			falloff_value = pow(falloff_value, a) / (pow(falloff_value, a) + pow(b - b * falloff_value, a))
+			value -= falloff_value
+			
 			height_map.set_pixel(x, y, Color(value, value, value, 1))
 	return height_map
-
-
-func _generate_falloff_map() -> Image:
-	var falloff_map = Image.create(size, size, false, Image.FORMAT_RGBA8)	
-	for y in size:
-		for x in size:
-			var value = maxf(absf(float(x) / float(size) * 2 - 1), 
-							absf(float(y) / float(size) * 2 - 1))
-			var a = 3.0
-			var b = 2.2
-			value = pow(value, a) / (pow(value, a) + pow(b - b * value, a))
-			falloff_map.set_pixel(x, y, Color(Color.BLACK.lerp(Color.WHITE, value)))
-	return falloff_map

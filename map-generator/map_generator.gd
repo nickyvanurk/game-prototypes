@@ -11,10 +11,10 @@ extends Node
 
 @export var deep_water = 0.2
 @export var shallow_water = 0.4
-@export var sand = 0.5
-@export var grass = 0.7
-@export var forest = 0.8
-@export var rock = 0.9
+@export var sand = 0.45
+@export var grass = 0.6
+@export var forest = 0.7
+@export var rock = 0.75
 @export var snow = 1.0
 
 @export var deep_water_color = Color(0, 0, 0.5, 1)
@@ -45,7 +45,7 @@ func _generate():
 	for y in size:
 		for x in size:
 			height_map.set_pixel(x, y, height_map.get_pixel(x, y) - falloff_map.get_pixel(x, y))
-	
+
 	var colored_height_map = _generate_colored_height_map(height_map)
 	preview.texture = ImageTexture.create_from_image(colored_height_map)
 
@@ -81,7 +81,7 @@ func _generate_height_map() -> Image:
 	n.fractal_octaves = octaves
 	n.fractal_gain = persistence
 	n.fractal_lacunarity = lacunarity
-	return n.get_image(size, size)
+	return n.get_image(size, size, false, false, false)
 
 
 func _generate_falloff_map() -> Image:
@@ -95,13 +95,3 @@ func _generate_falloff_map() -> Image:
 			value = pow(value, a) / (pow(value, a) + pow(b - b * value, a))
 			falloff_map.set_pixel(x, y, Color(Color.BLACK.lerp(Color.WHITE, value)))
 	return falloff_map
-
-
-
-func _generate_texture() -> Image:
-	var image = Image.create(size, size, false, Image.FORMAT_RGBA8)
-	for y in range(size):
-		for x in range(size):
-			var color = Color(randi_range(0, 255), randi_range(0, 255), randi_range(0, 255), randf_range(0, 1))
-			image.set_pixel(x, y, Color.BLACK)
-	return image

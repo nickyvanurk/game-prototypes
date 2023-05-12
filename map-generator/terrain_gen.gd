@@ -33,7 +33,8 @@ func _generate_terrain(height_map: Image):
 	for z in size + 1:
 		for x in size + 1:
 			surface_tool.set_uv(Vector2(inverse_lerp(0, size, x), inverse_lerp(0, size, z)))
-			surface_tool.add_vertex(Vector3(-half_size + x, (height_map.get_pixel(x, z).r - 0.5) * height_scale, -half_size + z))
+			var y = height_map.get_pixel(x, z).r
+			surface_tool.add_vertex(Vector3(-half_size + x, (y - 0.5) * height_scale, -half_size + z))
 	
 	var vert_idx = 0
 	for z in size:
@@ -49,3 +50,9 @@ func _generate_terrain(height_map: Image):
 	
 	surface_tool.generate_normals()
 	mesh = surface_tool.commit()
+	_update_shader()
+
+
+func _update_shader():
+	get_active_material(0).set_shader_parameter("min_height", -0.5 * height_scale)
+	get_active_material(0).set_shader_parameter("max_height", 0.5 * height_scale)

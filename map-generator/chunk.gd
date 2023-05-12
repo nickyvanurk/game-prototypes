@@ -3,12 +3,12 @@ extends MeshInstance3D
 
 
 @export var height_scale = 100
-@export var resolution = 1.0
+@export var resolution = 64
 
-var lods = [1, 2, 4, 8, 16, 32]
+var lods = [1, 4, 8, 16, 32, 64]
 
 
-func _generate(height_map: Image, offset: Vector2, size: int):
+func _generate(height_map: Image, offset: Vector3, size: int):
 	var scaled_size = size / resolution
 	var scaled_half_size = scaled_size / 2
 	var surface_tool = SurfaceTool.new()
@@ -36,22 +36,24 @@ func _generate(height_map: Image, offset: Vector2, size: int):
 	_update_shader()
 	
 	position.x = offset.x * size
-	position.z = offset.y * size	
+	position.z = offset.z * size	
 
 
-func _update_lod(player_pos: Vector3):
-	var distance = position.distance_to(player_pos)
-	var lod = lods[0]
-	if distance > 1000:
+func _update_lod(viewer_pos: Vector3):
+	var distance = position.distance_to(viewer_pos)
+	var lod = lods[5]
+	if distance > 500:
 		lod = lods[5];
-	elif distance > 800:
-		lod = lods[4]
-	elif distance > 600:
-		lod = lods[3]
 	elif distance > 400:
-		lod = lods[2]
+		lod = lods[4]
+	elif distance > 300:
+		lod = lods[3]
 	elif distance > 200:
+		lod = lods[2]
+	elif distance > 100:
 		lod = lods[1]
+	else:
+		lod = lods[0]
 		
 	if resolution != lod:
 		resolution = lod

@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dydmsw3yooola"]
+
+[ext_resource type="Shader" path="res://terrain_color.gdshader" id="1_6c1xi"]
+[ext_resource type="Script" path="res://chunk.gd" id="1_mh2es"]
+[ext_resource type="Texture2D" uid="uid://ck4jr53elgjln" path="res://terrain.tres" id="2_rqu02"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5asn5"]
+render_priority = 0
+shader = ExtResource("1_6c1xi")
+shader_parameter/min_height = 0.0
+shader_parameter/max_height = 1.0
+shader_parameter/terrain_color = ExtResource("2_rqu02")
+
+[node name="Chunk" type="MeshInstance3D"]
+material_override = SubResource("ShaderMaterial_5asn5")
+script = ExtResource("1_mh2es")

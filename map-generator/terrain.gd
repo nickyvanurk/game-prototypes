@@ -12,9 +12,6 @@ var total_chunks
 
 
 func _ready():
-#	RenderingServer.set_debug_generate_wireframes(true)
-#	get_viewport().debug_draw = Viewport.DEBUG_DRAW_WIREFRAME
-	
 	map_generator.seed = 21
 	map_generator.chunk_size = chunk_size
 	var height_map = map_generator._generate_height_map()

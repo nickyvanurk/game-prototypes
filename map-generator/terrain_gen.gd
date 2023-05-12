@@ -57,4 +57,4 @@ func _generate_terrain(height_map: Image):
 
 func _update_shader():
 	get_active_material(0).set_shader_parameter("min_height", -0.5 * height_scale)
-	get_active_material(0).set_shader_parameter("max_height", 0.5 * height_scale)
+	get_active_material(0).set_shader_parameter("max_height", 0.0 * height_scale)

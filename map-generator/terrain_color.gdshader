@@ -6,7 +6,7 @@ uniform float max_height = 1;
 varying float height;
 
 float inverse_lerp(float a, float b, float value) {
-	return clamp(0.01, 1.0, (value - a) / (b - a));
+	return clamp((value - a) / (b - a), 0.01, 1.0);
 }
 
 void vertex() {

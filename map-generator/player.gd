@@ -28,7 +28,8 @@ func _process(delta):
 		up_down_dir = -1
 	var direction = (camera.global_transform.basis * Vector3(input_dir.x, up_down_dir, input_dir.y)).normalized()
 	if direction:
-		velocity = direction * speed
+		var speed_modifier = 3 if Input.is_action_pressed("speed_boost") else 1
+		velocity = direction * speed * speed_modifier
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.y = move_toward(velocity.y, 0, speed)

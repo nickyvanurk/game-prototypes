@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://kofy8rsx4kfk"]
+
+[ext_resource type="Script" path="res://infinite_terrain.gd" id="1_ub7ka"]
+[ext_resource type="PackedScene" uid="uid://dydmsw3yooola" path="res://chunk.tscn" id="2_6jeoe"]
+
+[node name="InfiniteTerrain" type="Node3D" node_paths=PackedStringArray("viewer")]
+visible = false
+script = ExtResource("1_ub7ka")
+viewer = NodePath("../Player")
+chunk_scene = ExtResource("2_6jeoe")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bww15trpslyxb"]
+
+[ext_resource type="Script" path="res://quad_tree.gd" id="1_uglbw"]
+
+[node name="QuadTree" type="Node3D"]
+script = ExtResource("1_uglbw")
+morph_range = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[node name="SubQuads" type="Node3D" parent="."]

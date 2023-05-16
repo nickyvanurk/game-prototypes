@@ -10,21 +10,20 @@ class_name QuadTree
 @export_range(0, 32000, 1) var mesh_vertex_resolution := 256
 @export var ranges := [50.0, 100.0, 200.0]
 @export var material: ShaderMaterial
+
+@onready var mesh_instance := $MeshInstance3D
+@onready var _visibility_detector := $VisibleOnScreenNotifier3D
+@onready var subquad_node = $SubQuads
 	
 var Quad
 
-var is_root_quad := true
+var is_root := true
 var cull_box: AABB
 var lod_meshes: Array[PlaneMesh] = []
-var mesh_instance: MeshInstance3D
-
-var _visibility_detector: VisibleOnScreenNotifier3D
 var _subquads: Array[QuadTree] = []
 
 func _ready() -> void:
-	var subquad_node
-
-	if is_root_quad:
+	if is_root:
 		Quad = load("res://quad_tree.tscn")
 		
 		var camera := get_viewport().get_camera_3d()
@@ -49,10 +48,6 @@ func _ready() -> void:
 			
 			lod_meshes.insert(0, mesh)
 			current_size *= 0.5
-	else:
-		mesh_instance = $MeshInstance3D
-		subquad_node = $SubQuads
-		_visibility_detector = $VisibleOnScreenNotifier3D
 	
 	mesh_instance.visible = false
 	mesh_instance.mesh = lod_meshes[lod_level]
@@ -79,7 +74,7 @@ func _ready() -> void:
 			new_quad.position = offset * offset_length
 			new_quad.Quad = Quad
 			new_quad.lod_meshes = lod_meshes
-			new_quad.is_root_quad = false
+			new_quad.is_root = false
 			new_quad.material = material
 			
 			subquad_node.add_child(new_quad)
@@ -96,7 +91,7 @@ func lod_select(cam_pos: Vector3) -> bool:
 	if not within_sphere(cam_pos, ranges[lod_level]):
 		reset_visibility()
 		
-		if is_root_quad:
+		if is_root:
 			mesh_instance.visible = true
 
 		return false

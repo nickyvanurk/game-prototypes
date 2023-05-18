@@ -25,21 +25,21 @@ func _generate():
 	n.fractal_octaves = 6
 	n.fractal_gain = 0.5
 	n.fractal_lacunarity = 2.0
-	
+
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	
+
 	var half_size = size / 2
 	var thisrow = 0
 	var prevrow = 0
 	var point = 0
-	
+
 	for z in size:
 		for x in size:
 			st.set_uv(Vector2(inverse_lerp(0, size, x), inverse_lerp(0, size, z)))
 			st.add_vertex(Vector3(-half_size + x, n.get_noise_2d(x, z) * height_scale, -half_size + z))
 			point += 1
-			
+
 			if z > 0 and x > 0:
 				st.add_index(prevrow + x - 1)
 				st.add_index(prevrow + x)
@@ -53,9 +53,9 @@ func _generate():
 
 	st.generate_normals()
 	st.generate_tangents()
-	
+
 	mesh = st.commit()
-	
+
 	_update_shader()
 
 

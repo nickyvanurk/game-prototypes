@@ -25,7 +25,7 @@ func _process(delta):
 func _update_chunks():
 	var current_x = roundi(viewer.position.x / chunk_size)
 	var current_z = roundi(viewer.position.z / chunk_size)
-	
+
 	for offset_z in range(-total_chunks, total_chunks):
 		for offset_x in range(-total_chunks, total_chunks):
 			var viewer_offset = Vector3(current_x - offset_x, 0, current_z - offset_z)

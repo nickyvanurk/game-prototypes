@@ -18,7 +18,7 @@ func _generate(height_map: Image, offset: Vector3, size: int):
 			surface_tool.set_uv(Vector2(inverse_lerp(0, scaled_size, x * resolution), inverse_lerp(0, scaled_size, z * resolution)))
 			var y = height_map.get_pixel(x * resolution, z * resolution).r
 			surface_tool.add_vertex(Vector3(-scaled_half_size * resolution + x * resolution, (y - 0.5) * height_scale, -scaled_half_size * resolution + z * resolution))
-	
+
 	var vert_idx = 0
 	for z in scaled_size:
 		for x in scaled_size:
@@ -30,13 +30,13 @@ func _generate(height_map: Image, offset: Vector3, size: int):
 			surface_tool.add_index(vert_idx + scaled_size + 2)
 			vert_idx += 1
 		vert_idx += 1
-	
+
 	surface_tool.generate_normals()
 	mesh = surface_tool.commit()
 	_update_shader()
-	
+
 	position.x = offset.x * size
-	position.z = offset.z * size	
+	position.z = offset.z * size
 
 
 func _update_lod(viewer_pos: Vector3):
@@ -54,7 +54,7 @@ func _update_lod(viewer_pos: Vector3):
 		lod = lods[1]
 	else:
 		lod = lods[0]
-		
+
 	if resolution != lod:
 		resolution = lod
 		return true

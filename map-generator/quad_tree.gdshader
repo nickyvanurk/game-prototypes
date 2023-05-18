@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode world_vertex_coords, depth_draw_always, cull_disabled;
+//render_mode world_vertex_coords, depth_draw_always, cull_disabled;
 
 instance uniform float patch_size = 512.0;
 instance uniform float min_lod_morph_distance;

@@ -4,11 +4,11 @@ extends Node3D
 class_name QuadTree
 
 
-@export_range(0, 1000000, 1) var lod_level := 2
+@export_range(0, 1000000, 1) var lod_level := 3
 @export_range(1.0, 65535.0) var quad_size := 1024.0
 @export_range(0.0, 1.0, 0.001) var morph_range := 0.15
 @export_range(0, 32000, 1) var mesh_vertex_resolution := 256
-@export var ranges := [50.0, 100.0, 200.0]
+@export var ranges := [50.0, 100.0, 200.0, 300.0]
 @export var material: ShaderMaterial
 
 @onready var mesh_instance := $MeshInstance3D
@@ -22,14 +22,11 @@ var cull_box: AABB
 var lod_meshes: Array[PlaneMesh] = []
 var _subquads: Array[QuadTree] = []
 
+
 func _ready() -> void:
 	if is_root:
 		Quad = load("res://quad_tree.tscn")
 		
-		var camera := get_viewport().get_camera_3d()
-		material.set_shader_parameter("view_distance_max", camera.far)
-		material.set_shader_parameter("vertex_resolution", mesh_vertex_resolution)
-
 		mesh_instance = MeshInstance3D.new()
 		subquad_node = Node3D.new()
 		_visibility_detector = VisibleOnScreenNotifier3D.new()
@@ -45,16 +42,13 @@ func _ready() -> void:
 			mesh.size = Vector2.ONE * current_size
 			mesh.subdivide_depth = mesh_vertex_resolution - 1
 			mesh.subdivide_width = mesh.subdivide_depth
-			
+
 			lod_meshes.insert(0, mesh)
 			current_size *= 0.5
 	
 	mesh_instance.visible = false
 	mesh_instance.mesh = lod_meshes[lod_level]
 	mesh_instance.material_override = material
-	mesh_instance.set_instance_shader_parameter("patch_size", quad_size)
-	mesh_instance.set_instance_shader_parameter("min_lod_morph_distance", ranges[lod_level] * 2 * (1.0 - morph_range))
-	mesh_instance.set_instance_shader_parameter("max_lod_morph_distance", ranges[lod_level] * 2)
 	
 	_visibility_detector.aabb = AABB(Vector3(-quad_size * 0.75, -quad_size * 0.5, -quad_size * 0.75),
 		Vector3(quad_size * 1.5, quad_size, quad_size * 1.5))

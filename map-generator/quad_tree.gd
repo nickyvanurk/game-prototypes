@@ -36,7 +36,7 @@ func _ready() -> void:
 		var current_size = quad_size
 
 		for i in lod_level + 1:
-			var tile_size = current_size / subdivisions
+			var tile_size = current_size / subdivisions / 2.0
 			var half_size = current_size / 2.0
 
 			var st = SurfaceTool.new()
@@ -46,19 +46,27 @@ func _ready() -> void:
 			var prevrow = 0
 			var point = 0
 
-			for z in subdivisions + 1:
-				for x in subdivisions + 1:
-					st.set_uv(Vector2(inverse_lerp(0, subdivisions + 1, x), inverse_lerp(0, subdivisions + 1, z)))
+			for z in subdivisions * 2.0 + 1:
+				for x in subdivisions * 2.0 + 1:
+					st.set_uv(Vector2(inverse_lerp(0, subdivisions * 2.0 + 1, x), inverse_lerp(0, subdivisions * 2.0 + 1, z)))
 					st.add_vertex(Vector3(-half_size + x * tile_size, 0, -half_size + z * tile_size))
 					point += 1
 
 					if z > 0 and x > 0:
-						st.add_index(prevrow + x - 1)
-						st.add_index(prevrow + x)
-						st.add_index(thisrow + x - 1)
-						st.add_index(prevrow + x)
-						st.add_index(thisrow + x)
-						st.add_index(thisrow + x - 1)
+						if int(z + x) % 2 == 0:
+							st.add_index(prevrow + x - 1)
+							st.add_index(prevrow + x)
+							st.add_index(thisrow + x)
+							st.add_index(prevrow + x - 1)
+							st.add_index(thisrow + x)
+							st.add_index(thisrow + x - 1)
+						else:
+							st.add_index(prevrow + x - 1)
+							st.add_index(prevrow + x)
+							st.add_index(thisrow + x - 1)
+							st.add_index(prevrow + x)
+							st.add_index(thisrow + x)
+							st.add_index(thisrow + x - 1)
 
 				prevrow = thisrow
 				thisrow = point

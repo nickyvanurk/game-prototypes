@@ -1,23 +1,18 @@
-[gd_resource type="Environment" load_steps=3 format=3 uid="uid://clh6m2chst1k1"]
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://clh6m2chst1k1"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_aysrv"]
-sky_top_color = Color(0.337255, 0.580392, 0.866667, 1)
-sky_horizon_color = Color(0.839216, 0.917647, 0.980392, 1)
-sky_curve = 0.109807
-ground_bottom_color = Color(0.337255, 0.580392, 0.866667, 1)
-ground_horizon_color = Color(0.839216, 0.917647, 0.980392, 1)
-ground_curve = 0.121257
+[ext_resource type="Texture2D" uid="uid://bvmwhrelydg81" path="res://assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_sntfe"]
 
-[sub_resource type="Sky" id="1"]
-sky_material = SubResource("ProceduralSkyMaterial_aysrv")
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ovgg"]
+panorama = ExtResource("1_sntfe")
+
+[sub_resource type="Sky" id="Sky_6lgij"]
+sky_material = SubResource("PanoramaSkyMaterial_0ovgg")
 
 [resource]
 background_mode = 2
-sky = SubResource("1")
+sky = SubResource("Sky_6lgij")
 ambient_light_source = 3
-ambient_light_color = Color(0.501961, 0.501961, 0.501961, 1)
-ambient_light_sky_contribution = 0.26
-ambient_light_energy = 5.0
+reflected_light_source = 2
 tonemap_mode = 3
 tonemap_white = 1.55
 fog_light_energy = 6.74

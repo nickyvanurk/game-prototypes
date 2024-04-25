@@ -33,11 +33,3 @@ Inventory\
 Dialogue System\
 Combat\
 Seamless Portals
-
-## Todo
-
-- [ ] Upgrade projects to Godot 4
-  - [x] Basic Scene
-  - [x] Grappling Hook
-  - [x] Procedural Animation
-- [ ] Create video tutorials for each project
